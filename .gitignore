@@ -6,3 +6,6 @@ desktop.ini
 
 # Config local do Claude Code (o launch.json fica versionado de propósito)
 .claude/settings.local.json
+
+# Backups locais do editor
+*.bak
