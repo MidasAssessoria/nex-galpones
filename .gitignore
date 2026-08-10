@@ -9,3 +9,4 @@ desktop.ini
 
 # Backups locais do editor
 *.bak
+*.bak[0-9]
