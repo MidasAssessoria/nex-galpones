@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #F5F5F3; font-family: "IBM Plex Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #16452C; text-decoration: none; }
+  a:hover { color: #2E7D4F; }
+  input, textarea, select, button { font-family: inherit; }
+</style>
+</helmet>
+<div style="min-height:100vh; background:#F5F5F3; color:#14171A;">
+
+  <header style="position:sticky; top:0; z-index:50; background:#FFFFFF; border-bottom:1px solid #E3E3DF;">
+    <div style="max-width:1280px; margin:0 auto; padding:0 32px; height:84px; display:flex; align-items:center; justify-content:space-between; gap:32px;">
+      <div onClick="{{ goHome }}" style="display:flex; align-items:center; cursor:pointer;">
+        <img src="assets/logo.jpg" alt="NEX Galpones Paraguay" style="height:52px; width:auto; display:block; mix-blend-mode:multiply;" />
+      </div>
+      <nav style="display:flex; align-items:center; gap:4px;">
+        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="5">
+          <button onClick="{{ item.go }}" style="background:none; border:0; padding:10px 16px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; border-bottom:2px solid transparent; color:{{ item.color }}; border-bottom-color:{{ item.line }};" style-hover="color:#16452C;">{{ item.label }}</button>
+        </sc-for>
+        <button onClick="{{ goContacto }}" style="margin-left:16px; background:#16452C; color:#FFFFFF; border:0; padding:14px 24px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;" style-hover="background:#2E7D4F;">Cotizar obra</button>
+      </nav>
+    </div>
+  </header>
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <main>
+    <section style="position:relative; min-height:660px; display:flex; align-items:flex-end; background:#14171A; overflow:hidden;">
+      <img src="assets/hero-cialog.jpg" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.55;" />
+      <div style="position:absolute; inset:0; background:linear-gradient(90deg,#0D1512 0%,rgba(13,21,18,0.75) 45%,rgba(13,21,18,0.25) 100%);"></div>
+      <div style="position:relative; max-width:1280px; margin:0 auto; padding:96px 32px; width:100%;">
+        <div style="display:inline-flex; align-items:center; gap:12px; border:1px solid rgba(255,255,255,0.35); padding:8px 16px; margin-bottom:32px;">
+          <span style="width:7px; height:7px; background:#4CAF6D; display:block;"></span>
+          <span style="color:#FFFFFF; font-family:'Archivo',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;">Ahora en Paraguay</span>
+        </div>
+        <h1 style="margin:0; max-width:900px; font-family:'Archivo',sans-serif; font-size:76px; line-height:1.02; font-weight:800; letter-spacing:-0.025em; color:#FFFFFF; text-wrap:balance;">Estructuras que construyen el futuro</h1>
+        <p style="margin:28px 0 0; max-width:620px; font-size:19px; line-height:1.6; color:rgba(255,255,255,0.82);">36 años de Rótula Metalúrgica en Brasil, ahora al servicio de la industria paraguaya. Galpones logísticos, estructuras metálicas y obras de infraestructura con ingeniería avanzada.</p>
+        <div style="display:flex; gap:16px; margin-top:44px; flex-wrap:wrap;">
+          <button onClick="{{ goContacto }}" style="background:#FFFFFF; color:#14171A; border:0; padding:18px 34px; font-family:'Archivo',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;" style-hover="background:#4CAF6D; color:#FFFFFF;">Solicitar cotización</button>
+          <button onClick="{{ goObras }}" style="background:transparent; color:#FFFFFF; border:1px solid rgba(255,255,255,0.5); padding:18px 34px; font-family:'Archivo',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;" style-hover="border-color:#FFFFFF; background:rgba(255,255,255,0.08);">Ver portafolio</button>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#16452C;">
+      <div style="max-width:1280px; margin:0 auto; padding:0 32px; display:grid; grid-template-columns:repeat(4,1fr);">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div style="padding:48px 24px 48px 0; border-right:1px solid rgba(255,255,255,0.14);">
+            <div style="font-family:'Archivo',sans-serif; font-size:46px; font-weight:800; color:#FFFFFF; letter-spacing:-0.02em; line-height:1;">{{ s.n }}</div>
+            <div style="margin-top:12px; font-size:14px; line-height:1.5; color:rgba(255,255,255,0.7);">{{ s.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="max-width:1280px; margin:0 auto; padding:120px 32px; display:grid; grid-template-columns:0.85fr 1.15fr; gap:80px; align-items:start;">
+      <div>
+        <div style="font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#2E7D4F;">Llegada a Paraguay</div>
+        <h2 style="margin:20px 0 0; font-family:'Archivo',sans-serif; font-size:44px; line-height:1.1; font-weight:700; letter-spacing:-0.02em;">Una metalúrgica brasileña con obra probada, ahora instalada acá</h2>
+      </div>
+      <div>
+        <p style="margin:0; font-size:18px; line-height:1.7; color:#3D4348;">NEX Galpones Paraguay nace de la operación de Rótula Metalúrgica, fundada en 1989 por el ingeniero mecánico Pedro Gordilho y hoy una de las principales metalúrgicas de Brasil. Traemos al mercado paraguayo la misma capacidad industrial: más de 20.000 toneladas al año, modelado BIM en Tekla Structures y maquinaria CNC de precisión milimétrica.</p>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px;">
+          <sc-for list="{{ pilares }}" as="p" hint-placeholder-count="3">
+            <div style="border-top:2px solid #14171A; padding-top:20px;">
+              <div style="font-family:'Archivo',sans-serif; font-size:17px; font-weight:700; letter-spacing:-0.01em;">{{ p.t }}</div>
+              <div style="margin-top:10px; font-size:15px; line-height:1.6; color:#5B6268;">{{ p.d }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#FFFFFF; border-top:1px solid #E3E3DF; border-bottom:1px solid #E3E3DF;">
+      <div style="max-width:1280px; margin:0 auto; padding:110px 32px;">
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:40px; margin-bottom:56px;">
+          <div>
+            <div style="font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#2E7D4F;">Segmentos de actuación</div>
+            <h2 style="margin:20px 0 0; font-family:'Archivo',sans-serif; font-size:44px; line-height:1.1; font-weight:700; letter-spacing:-0.02em; max-width:640px;">Dónde entregamos estructura</h2>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:28px;">
+          <sc-for list="{{ segmentos }}" as="sg" hint-placeholder-count="4">
+            <div style="background:#F5F5F3; border:1px solid #E3E3DF; padding:36px 28px; min-height:340px; display:flex; flex-direction:column;" style-hover="border-color:#16452C;">
+              <div style="font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; color:#2E7D4F; letter-spacing:0.1em;">{{ sg.num }}</div>
+              <img src="{{ sg.iso }}" alt="" loading="lazy" style="width:100%; height:132px; margin:24px 0 4px; object-fit:contain; object-position:left bottom;" />
+              <div style="margin-top:auto;">
+                <div style="font-family:'Archivo',sans-serif; font-size:22px; font-weight:700; letter-spacing:-0.01em;">{{ sg.t }}</div>
+                <div style="margin-top:14px; font-size:15px; line-height:1.6; color:#5B6268;">{{ sg.d }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px; margin:0 auto; padding:120px 32px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid #E3E3DF; background:#FFFFFF;">
+        <div style="padding:64px 56px;">
+          <div style="font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#2E7D4F;">Tecnología SINEJOIST®</div>
+          <h2 style="margin:20px 0 0; font-family:'Archivo',sans-serif; font-size:40px; line-height:1.1; font-weight:700; letter-spacing:-0.02em;">El sistema que redefine la cubierta metálica</h2>
+          <p style="margin:24px 0 0; font-size:17px; line-height:1.7; color:#3D4348;">Vigas de alma senoidal con inercia variable y correas tipo joist galvanizadas: estructuras livianas, robustas y de montaje rápido, ideales para centros logísticos y galpones industriales.</p>
+          <button onClick="{{ goTecnologia }}" style="margin-top:36px; background:#14171A; color:#FFFFFF; border:0; padding:16px 30px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;" style-hover="background:#16452C;">Conocer la tecnología</button>
+        </div>
+        <div style="position:relative; min-height:420px; background:#14171A;">
+          <img src="assets/sinejoist.jpg" alt="Sistema SineJoist" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#14171A; color:#FFFFFF;">
+      <div style="max-width:1280px; margin:0 auto; padding:110px 32px;">
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:40px; margin-bottom:48px;">
+          <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:44px; line-height:1.1; font-weight:700; letter-spacing:-0.02em;">Obras destacadas</h2>
+          <button onClick="{{ goObras }}" style="background:none; border:0; border-bottom:1px solid rgba(255,255,255,0.4); padding:6px 0; color:#FFFFFF; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer;" style-hover="border-bottom-color:#4CAF6D; color:#4CAF6D;">Ver las 16 obras</button>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+          <sc-for list="{{ destacadas }}" as="o" hint-placeholder-count="3">
+            <div style="background:#1D2124;">
+              <div style="position:relative; height:280px; background:#22282B; overflow:hidden;">
+                <img src="{{ o.img }}" alt="{{ o.t }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+              </div>
+              <div style="padding:28px 26px 32px;">
+                <div style="font-family:'Archivo',sans-serif; font-size:21px; font-weight:700; letter-spacing:-0.01em;">{{ o.t }}</div>
+                <div style="margin-top:10px; font-size:14px; color:rgba(255,255,255,0.55);">{{ o.loc }}</div>
+                <div style="margin-top:18px; font-family:'Archivo',sans-serif; font-size:15px; font-weight:600; color:#4CAF6D;">{{ o.medida }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px; margin:0 auto; padding:120px 32px;">
+      <div style="background:#16452C; color:#FFFFFF; padding:80px 64px; display:grid; grid-template-columns:1.2fr 0.8fr; gap:60px; align-items:center;">
+        <div>
+          <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:42px; line-height:1.12; font-weight:700; letter-spacing:-0.02em;">¿Tiene un proyecto en Paraguay? Lo dimensionamos con usted.</h2>
+          <p style="margin:20px 0 0; font-size:17px; line-height:1.7; color:rgba(255,255,255,0.78); max-width:560px;">Enviános el alcance de la obra —metros cuadrados, luz libre, plazo— y te devolvemos una propuesta técnica con estimación de tonelaje.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <button onClick="{{ goContacto }}" style="background:#FFFFFF; color:#16452C; border:0; padding:20px 30px; font-family:'Archivo',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;" style-hover="background:#4CAF6D; color:#FFFFFF;">Solicitar cotización</button>
+          <a href="https://wa.me/595000000000" target="_blank" style="background:transparent; color:#FFFFFF; border:1px solid rgba(255,255,255,0.5); padding:20px 30px; font-family:'Archivo',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; text-align:center;" style-hover="background:rgba(255,255,255,0.1);">Escribir por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isEmpresa }}">
+  <main>
+    <section style="background:#FFFFFF; border-bottom:1px solid #E3E3DF;">
+      <div style="max-width:1280px; margin:0 auto; padding:88px 32px 72px;">
+        <div style="font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#2E7D4F;">La empresa</div>
+        <h1 style="margin:20px 0 0; font-family:'Archivo',sans-serif; font-size:60px; line-height:1.05; font-weight:800; letter-spacing:-0.025em; max-width:900px;">Desde 1989 fabricando estructura pesada</h1>
+      </div>
+    </section>
+
+    <section style="max-width:1280px; margin:0 auto; padding:96px 32px; display:grid; grid-template-columns:1fr 1fr; gap:80px;">
+      <div>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:32px; font-weight:700; letter-spacing:-0.02em;">Nuestra historia</h2>
+        <p style="margin:20px 0 0; font-size:17px; line-height:1.75; color:#3D4348;">Fundada en 1989 por el ingeniero mecánico Pedro Gordilho, Rótula Metalúrgica es referencia en el mercado de estructuras metálicas, mixtas y de ingeniería avanzada. Ofrece soluciones estructurales para edificios de múltiples pisos, cubiertas de galpones logísticos, puentes, viaductos y pasarelas.</p>
+        <p style="margin:18px 0 0; font-size:17px; line-height:1.75; color:#3D4348;">Con obras en más de 12 estados de Brasil y fuera del país, la empresa opera con capacidad para producir más de 20.000 toneladas al año, con productos de alta diversidad y complejidad. NEX Galpones Paraguay es la extensión de esa operación al mercado paraguayo.</p>
+      </div>
+      <div>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:32px; font-weight:700; letter-spacing:-0.02em;">Logística internacional</h2>
+        <p style="margin:20px 0 0; font-size:17px; line-height:1.75; color:#3D4348;">Una cadena logística estructurada con transportes intermodales permite entregar proyectos completos más allá de las fronteras: alta calidad, menor costo y plazo cumplido. Es la misma capacidad que sostiene obras entregadas en Guyana Inglesa y la que hoy abastece a Paraguay.</p>
+        <div style="margin-top:36px; border:1px solid #E3E3DF; background:#FFFFFF;">
+          <sc-for list="{{ hitos }}" as="h" hint-placeholder-count="4">
+            <div style="display:flex; gap:28px; padding:22px 26px; border-bottom:1px solid #EDEDEA;">
+              <div style="font-family:'Archivo',sans-serif; font-size:15px; font-weight:700; color:#2E7D4F; min-width:64px;">{{ h.y }}</div>
+              <div style="font-size:15px; line-height:1.6; color:#3D4348;">{{ h.t }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#14171A; color:#FFFFFF;">
+      <div style="max-width:1280px; margin:0 auto; padding:96px 32px; display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center;">
+        <div>
+          <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:38px; line-height:1.12; font-weight:700; letter-spacing:-0.02em;">Capacidad industrial</h2>
+          <p style="margin:20px 0 0; font-size:17px; line-height:1.75; color:rgba(255,255,255,0.72);">Tecnología de última generación, sistemas modernos de automatización y maquinaria CNC que garantizan precisión milimétrica y alta productividad en la fabricación.</p>
+          <img src="assets/pieza-nudo.webp" alt="Conexión aparafusada de viga y pilar" loading="lazy" style="display:block; width:100%; max-width:330px; margin:44px 0 0;" />
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,0.14);">
+          <sc-for list="{{ capacidad }}" as="c" hint-placeholder-count="4">
+            <div style="background:#14171A; padding:34px 28px;">
+              <div style="font-family:'Archivo',sans-serif; font-size:34px; font-weight:800; letter-spacing:-0.02em;">{{ c.n }}</div>
+              <div style="margin-top:10px; font-size:14px; line-height:1.5; color:rgba(255,255,255,0.6);">{{ c.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px; margin:0 auto; padding:96px 32px;">
+      <h2 style="margin:0 0 12px; font-family:'Archivo',sans-serif; font-size:32px; font-weight:700; letter-spacing:-0.02em;">Clientes</h2>
+      <p style="margin:0 0 40px; font-size:17px; line-height:1.75; color:#3D4348; max-width:720px;">Más que proveer estructuras metálicas, construimos relaciones de confianza con clientes de industria, comercio e infraestructura. Un portafolio que refleja excelencia e innovación.</p>
+      <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:#E3E3DF; border:1px solid #E3E3DF;">
+        <sc-for list="{{ sectores }}" as="s" hint-placeholder-count="6">
+          <div style="background:#FFFFFF; padding:38px 18px; text-align:center; font-family:'Archivo',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.04em; color:#5B6268;">{{ s }}</div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isTecnologia }}">
+  <main>
+    <section style="position:relative; background:#14171A; min-height:420px; display:flex; align-items:flex-end; overflow:hidden;">
+      <img src="assets/bim.jpg" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.45;" />
+      <div style="position:absolute; inset:0; background:linear-gradient(90deg,#0D1512 10%,rgba(13,21,18,0.2) 100%);"></div>
+      <div style="position:relative; max-width:1280px; margin:0 auto; padding:88px 32px; width:100%;">
+        <div style="font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#4CAF6D;">Tecnología</div>
+        <h1 style="margin:20px 0 0; font-family:'Archivo',sans-serif; font-size:60px; line-height:1.05; font-weight:800; letter-spacing:-0.025em; color:#FFFFFF; max-width:820px;">Ingeniería BIM y sistemas propios</h1>
+      </div>
+    </section>
+
+    <section style="max-width:1280px; margin:0 auto; padding:96px 32px; display:grid; grid-template-columns:1fr 1fr; gap:80px;">
+      <div>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:32px; font-weight:700; letter-spacing:-0.02em;">¿Qué es la tecnología BIM?</h2>
+        <p style="margin:20px 0 0; font-size:17px; line-height:1.75; color:#3D4348;">Adoptamos el modelado BIM en el desarrollo de los proyectos en ambiente virtual, considerando todos los detalles constructivos desde las etapas iniciales. Con Tekla Structures, cada elemento de acero se modela en 3D, asegurando alta precisión y excelencia técnica en la ejecución.</p>
+      </div>
+      <div>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:32px; font-weight:700; letter-spacing:-0.02em;">¿Por qué importa?</h2>
+        <p style="margin:20px 0 0; font-size:17px; line-height:1.75; color:#3D4348;">Combinamos tecnología de última generación con sistemas modernos de automatización y maquinaria CNC. El resultado: precisión milimétrica en fábrica, menos ajustes en obra, montaje más rápido y menos sorpresas de costo.</p>
+      </div>
+    </section>
+
+    <section style="background:#14171A; color:#FFFFFF;">
+      <div style="max-width:1280px; margin:0 auto; padding:80px 32px 92px; text-align:center;">
+        <div style="font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#4CAF6D;">Modelo estructural</div>
+        <img src="assets/bim-modelo.webp" alt="Modelo estructural en Tekla Structures con los perfiles diferenciados por tipo" loading="lazy" style="display:block; width:100%; max-width:940px; margin:40px auto 0;" />
+        <p style="margin:40px auto 0; max-width:620px; font-size:17px; line-height:1.7; color:rgba(255,255,255,0.72);">Cada perfil, chapa y tornillo queda definido en el modelo antes del primer corte en fábrica. Los colores identifican familias de piezas para fabricación y montaje.</p>
+      </div>
+    </section>
+
+    <section style="background:#FFFFFF; border-top:1px solid #E3E3DF; border-bottom:1px solid #E3E3DF;">
+      <div style="max-width:1280px; margin:0 auto; padding:96px 32px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; align-items:stretch;">
+          <div style="position:relative; min-height:640px; background:#FFFFFF; border-right:1px solid #E3E3DF; display:flex; align-items:center; justify-content:center; padding:40px 28px;">
+            <img src="assets/iso-sinejoist.webp" alt="Despiece del sistema SineJoist: chapa de cubierta, correa joist, viga de alma senoidal y pilar" loading="lazy" style="max-width:100%; max-height:620px; object-fit:contain;" />
+          </div>
+          <div style="padding:64px 56px; background:#F5F5F3;">
+            <div style="font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#2E7D4F;">Sistema propio</div>
+            <h2 style="margin:18px 0 0; font-family:'Archivo',sans-serif; font-size:42px; font-weight:800; letter-spacing:-0.025em;">SINEJOIST®</h2>
+            <p style="margin:20px 0 0; font-size:17px; line-height:1.75; color:#3D4348;">Combina vigas de alma senoidal con inercia variable y correas tipo joist galvanizadas: estructuras livianas, robustas y de rápida instalación, perfectas para centros logísticos, galpones industriales y proyectos de múltiples pisos.</p>
+            <div style="margin-top:36px; display:flex; flex-direction:column; gap:20px;">
+              <sc-for list="{{ ventajas }}" as="v" hint-placeholder-count="3">
+                <div style="border-left:2px solid #16452C; padding-left:20px;">
+                  <div style="font-family:'Archivo',sans-serif; font-size:17px; font-weight:700;">{{ v.t }}</div>
+                  <div style="margin-top:8px; font-size:15px; line-height:1.6; color:#5B6268;">{{ v.d }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px; margin:0 auto; padding:96px 32px;">
+      <h2 style="margin:0 0 40px; font-family:'Archivo',sans-serif; font-size:32px; font-weight:700; letter-spacing:-0.02em;">Del modelo a la obra</h2>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
+        <sc-for list="{{ proceso }}" as="p" hint-placeholder-count="4">
+          <div style="background:#FFFFFF; border:1px solid #E3E3DF; padding:32px 26px; min-height:230px;">
+            <div style="font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; color:#2E7D4F; letter-spacing:0.1em;">{{ p.num }}</div>
+            <div style="margin-top:20px; font-family:'Archivo',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.01em;">{{ p.t }}</div>
+            <div style="margin-top:12px; font-size:15px; line-height:1.6; color:#5B6268;">{{ p.d }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isObras }}">
+  <main>
+    <section style="background:#FFFFFF; border-bottom:1px solid #E3E3DF;">
+      <div style="position:relative; max-width:1280px; margin:0 auto; padding:88px 32px 0;">
+        <img src="assets/iso-grua.webp" alt="" loading="lazy" style="position:absolute; right:24px; bottom:0; height:360px; width:auto; opacity:0.16; pointer-events:none;" />
+        <div style="position:relative; font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#2E7D4F;">Portafolio</div>
+        <h1 style="position:relative; margin:20px 0 0; font-family:'Archivo',sans-serif; font-size:60px; line-height:1.05; font-weight:800; letter-spacing:-0.025em; max-width:900px;">16 obras entregadas en 12 estados y fuera del país</h1>
+        <div style="display:flex; gap:8px; margin-top:48px; flex-wrap:wrap;">
+          <sc-for list="{{ filtros }}" as="f" hint-placeholder-count="5">
+            <button onClick="{{ f.go }}" style="border:1px solid #E3E3DF; padding:12px 22px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; margin-bottom:-1px; background:{{ f.bg }}; color:{{ f.color }}; border-color:{{ f.border }};" style-hover="border-color:#16452C;">{{ f.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px; margin:0 auto; padding:64px 32px 110px;">
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:28px;">
+        <sc-for list="{{ obrasFiltradas }}" as="o" hint-placeholder-count="9">
+          <div style="background:#FFFFFF; border:1px solid #E3E3DF;" style-hover="border-color:#16452C;">
+            <div style="position:relative; height:240px; background:#20262A; overflow:hidden; display:flex; align-items:flex-end; padding:22px;">
+              <sc-if value="{{ o.hasImg }}">
+                <img src="{{ o.img }}" alt="{{ o.t }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+              </sc-if>
+              <sc-if value="{{ o.noImg }}">
+                <div style="position:absolute; inset:0; background:#1B2124; display:flex; align-items:center; justify-content:center; padding:30px 24px 44px;">
+                  <img src="{{ o.iso }}" alt="{{ o.t }}" loading="lazy" style="max-width:100%; max-height:100%; object-fit:contain; opacity:0.55;" />
+                </div>
+              </sc-if>
+              <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(13,21,18,0.75) 100%);"></div>
+              <div style="position:relative; font-family:'Archivo',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#FFFFFF;">{{ o.cat }}</div>
+            </div>
+            <div style="padding:26px 24px 30px;">
+              <div style="font-family:'Archivo',sans-serif; font-size:20px; font-weight:700; letter-spacing:-0.01em;">{{ o.t }}</div>
+              <div style="margin-top:8px; font-size:14px; color:#7A8085;">{{ o.loc }}</div>
+              <div style="margin-top:16px; padding-top:16px; border-top:1px solid #EDEDEA; font-family:'Archivo',sans-serif; font-size:15px; font-weight:600; color:#16452C;">{{ o.medida }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isContacto }}">
+  <main>
+    <section style="background:#FFFFFF; border-bottom:1px solid #E3E3DF;">
+      <div style="max-width:1280px; margin:0 auto; padding:88px 32px 72px;">
+        <div style="font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#2E7D4F;">Contacto</div>
+        <h1 style="margin:20px 0 0; font-family:'Archivo',sans-serif; font-size:60px; line-height:1.05; font-weight:800; letter-spacing:-0.025em; max-width:820px;">Contános tu obra</h1>
+        <p style="margin:22px 0 0; font-size:18px; line-height:1.7; color:#3D4348; max-width:640px;">Respondemos con una propuesta técnica preliminar: sistema estructural sugerido, estimación de tonelaje y plazo de fabricación.</p>
+      </div>
+    </section>
+
+    <section style="max-width:1280px; margin:0 auto; padding:80px 32px 110px; display:grid; grid-template-columns:1.25fr 0.75fr; gap:64px; align-items:start;">
+      <div style="background:#FFFFFF; border:1px solid #E3E3DF; padding:48px;">
+        <sc-if value="{{ enviado }}">
+          <div style="padding:40px 0; text-align:center;">
+            <div style="font-family:'Archivo',sans-serif; font-size:28px; font-weight:700; color:#16452C;">Solicitud enviada</div>
+            <p style="margin:14px 0 0; font-size:16px; color:#5B6268;">Gracias. Nuestro equipo comercial responde en un plazo de 48 horas hábiles.</p>
+            <button onClick="{{ resetForm }}" style="margin-top:28px; background:none; border:1px solid #E3E3DF; padding:14px 26px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;" style-hover="border-color:#16452C;">Enviar otra</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ noEnviado }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+            <label style="display:flex; flex-direction:column; gap:8px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#5B6268;">Nombre
+              <input type="text" placeholder="Nombre y apellido" style="border:0; border-bottom:1px solid #D8D8D3; padding:12px 0; font-size:16px; color:#14171A; background:transparent; outline:none;" style-focus="border-bottom-color:#16452C;" />
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#5B6268;">Empresa
+              <input type="text" placeholder="Razón social" style="border:0; border-bottom:1px solid #D8D8D3; padding:12px 0; font-size:16px; color:#14171A; background:transparent; outline:none;" style-focus="border-bottom-color:#16452C;" />
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#5B6268;">Email
+              <input type="email" placeholder="nombre@empresa.com.py" style="border:0; border-bottom:1px solid #D8D8D3; padding:12px 0; font-size:16px; color:#14171A; background:transparent; outline:none;" style-focus="border-bottom-color:#16452C;" />
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#5B6268;">Teléfono
+              <input type="tel" placeholder="+595" style="border:0; border-bottom:1px solid #D8D8D3; padding:12px 0; font-size:16px; color:#14171A; background:transparent; outline:none;" style-focus="border-bottom-color:#16452C;" />
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#5B6268;">Tipo de obra
+              <select style="border:0; border-bottom:1px solid #D8D8D3; padding:12px 0; font-size:16px; color:#14171A; background:transparent; outline:none;" style-focus="border-bottom-color:#16452C;">
+                <option>Galpón logístico</option>
+                <option>Nave industrial</option>
+                <option>Edificio de múltiples pisos</option>
+                <option>Puente / viaducto</option>
+                <option>Otro</option>
+              </select>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#5B6268;">Superficie estimada
+              <input type="text" placeholder="m² o toneladas" style="border:0; border-bottom:1px solid #D8D8D3; padding:12px 0; font-size:16px; color:#14171A; background:transparent; outline:none;" style-focus="border-bottom-color:#16452C;" />
+            </label>
+            <label style="grid-column:1 / -1; display:flex; flex-direction:column; gap:8px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#5B6268;">Descripción del proyecto
+              <textarea rows="4" placeholder="Ubicación, plazo previsto, luz libre, altura útil…" style="border:0; border-bottom:1px solid #D8D8D3; padding:12px 0; font-size:16px; color:#14171A; background:transparent; outline:none; resize:vertical;" style-focus="border-bottom-color:#16452C;"></textarea>
+            </label>
+          </div>
+          <button onClick="{{ enviar }}" style="margin-top:40px; background:#16452C; color:#FFFFFF; border:0; padding:20px 40px; font-family:'Archivo',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;" style-hover="background:#2E7D4F;">Enviar solicitud</button>
+        </sc-if>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:1px; background:#E3E3DF; border:1px solid #E3E3DF;">
+        <sc-for list="{{ contactos }}" as="c" hint-placeholder-count="4">
+          <div style="background:#FFFFFF; padding:28px 26px;">
+            <div style="font-family:'Archivo',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#2E7D4F;">{{ c.label }}</div>
+            <div style="margin-top:10px; font-size:16px; line-height:1.6; color:#14171A;">{{ c.value }}</div>
+          </div>
+        </sc-for>
+        <a href="https://wa.me/595000000000" target="_blank" style="background:#16452C; color:#FFFFFF; padding:26px; text-align:center; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;" style-hover="background:#2E7D4F; color:#FFFFFF;">Escribir por WhatsApp</a>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <footer style="background:#0D1512; color:rgba(255,255,255,0.6);">
+    <div style="max-width:1280px; margin:0 auto; padding:72px 32px 40px; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:56px;">
+      <div>
+        <div style="font-family:'Archivo',sans-serif; font-size:26px; font-weight:800; letter-spacing:-0.02em; color:#FFFFFF;">NEX GALPONES PARAGUAY</div>
+        <div style="margin-top:10px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:#4CAF6D;">Estructuras que construyen el futuro</div>
+        <p style="margin:24px 0 0; font-size:15px; line-height:1.7; max-width:420px;">Operación paraguaya de Rótula Metalúrgica, metalúrgica brasileña fundada en 1989. Estructuras metálicas, mixtas e ingeniería avanzada.</p>
+      </div>
+      <div>
+        <div style="font-family:'Archivo',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#FFFFFF;">Navegación</div>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:12px; margin-top:20px;">
+          <sc-for list="{{ nav }}" as="item" hint-placeholder-count="5">
+            <button onClick="{{ item.go }}" style="background:none; border:0; padding:0; color:rgba(255,255,255,0.6); font-size:15px; cursor:pointer; text-align:left;" style-hover="color:#FFFFFF;">{{ item.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Archivo',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#FFFFFF;">Contacto</div>
+        <div style="display:flex; flex-direction:column; gap:12px; margin-top:20px; font-size:15px; line-height:1.6;">
+          <div>Asunción, Paraguay</div>
+          <div>+595 21 000 000</div>
+          <div>comercial@nexgalpones.com.py</div>
+          <div>@nexgalponespy</div>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1280px; margin:0 auto; padding:24px 32px 48px; border-top:1px solid rgba(255,255,255,0.12); display:flex; justify-content:space-between; gap:24px; font-size:13px;">
+      <div>© 2026 NEX Galpones Paraguay · Grupo NEX</div>
+      <div>SINEJOIST® es marca registrada de Rótula Metalúrgica</div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { page: "home", filtro: "Todas", enviado: false };
+
+  go(page) {
+    this.setState({ page }, () => window.scrollTo(0, 0));
+  }
+
+  renderVals() {
+    const p = this.state.page;
+    const navItems = [
+      ["home", "Inicio"], ["empresa", "Empresa"], ["tecnologia", "Tecnología"],
+      ["obras", "Obras"], ["contacto", "Contacto"]
+    ].map(([id, label]) => ({
+      label, go: () => this.go(id),
+      color: p === id ? "#14171A" : "#6B7280",
+      line: p === id ? "#16452C" : "transparent"
+    }));
+
+    const obras = [
+      { t: "Galpón Lyon", loc: "Simões Filho / BA", medida: "85.000 m²", cat: "Cubiertas y galpones", img: "assets/lyon.jpg" },
+      { t: "Galpón Cone", loc: "Cabo de Santo Agostinho / PE", medida: "65.000 m²", cat: "Cubiertas y galpones", img: "assets/cone.jpg" },
+      { t: "Galpón CiaLog", loc: "Simões Filho / BA", medida: "30.000 m²", cat: "Cubiertas y galpones", img: "assets/hero-cialog.jpg" },
+      { t: "Galpón Brasília", loc: "Brasília / DF", medida: "42.000 m²", cat: "Cubiertas y galpones", img: null },
+      { t: "Exxon Mobil", loc: "Guyana Inglesa", medida: "1.200 ton", cat: "Industriales", img: "assets/exxon.jpg" },
+      { t: "Ferreira Costa", loc: "Salvador / BA", medida: "32.500 m²", cat: "Industriales", img: null },
+      { t: "Shopping Bela Vista", loc: "Salvador / BA", medida: "110.000 m²", cat: "Pisos múltiples", img: "assets/belavista.jpg" },
+      { t: "Shopping Rio Mar", loc: "Recife / PE", medida: "92.000 m²", cat: "Pisos múltiples", img: "assets/riomar.jpg" },
+      { t: "Salvador Shopping", loc: "Salvador / BA", medida: "3.800 ton", cat: "Pisos múltiples", img: null },
+      { t: "Hospital Samel", loc: "Manaus / AM", medida: "12.500 m²", cat: "Pisos múltiples", img: "assets/samel.jpg" },
+      { t: "Tribunal de Justicia", loc: "Salvador / BA", medida: "16.500 m²", cat: "Pisos múltiples", img: null },
+      { t: "Centro de Convenciones", loc: "Salvador / BA", medida: "37.000 m²", cat: "Pisos múltiples", img: "assets/convenciones.jpg" },
+      { t: "Concha Acústica", loc: "Salvador / BA", medida: "14.000 m²", cat: "Pisos múltiples", img: null },
+      { t: "Viaducto Complejo Imbuí", loc: "Salvador / BA", medida: "550 ton", cat: "Vías y transportes", img: "assets/viaducto.jpg" },
+      { t: "Complejo Viario Acceso Norte", loc: "Salvador / BA", medida: "480 ton", cat: "Vías y transportes", img: null },
+      { t: "Puente Sauípe", loc: "Bahía", medida: "280 ton", cat: "Vías y transportes", img: null }
+    ];
+    // isometrico por categoria: usado no card de segmento (verde, fondo claro)
+    // y como portada de las obras sin foto (blanco, fondo oscuro)
+    const ISO = {
+      "Cubiertas y galpones": "iso-galpon",
+      "Pisos múltiples":      "iso-multipiso",
+      "Industriales":         "iso-industrial",
+      "Vías y transportes":   "iso-viaducto"
+    };
+    obras.forEach(o => {
+      o.hasImg = !!o.img;
+      o.noImg = !o.img;
+      o.iso = `assets/${ISO[o.cat]}-w.webp`;
+    });
+    const cats = ["Todas", "Cubiertas y galpones", "Industriales", "Pisos múltiples", "Vías y transportes"];
+    const f = this.state.filtro;
+
+    return {
+      nav: navItems,
+      goHome: () => this.go("home"),
+      goObras: () => this.go("obras"),
+      goContacto: () => this.go("contacto"),
+      goTecnologia: () => this.go("tecnologia"),
+      isHome: p === "home", isEmpresa: p === "empresa", isTecnologia: p === "tecnologia",
+      isObras: p === "obras", isContacto: p === "contacto",
+
+      stats: [
+        { n: "36 años", label: "de operación continua desde 1989" },
+        { n: "20.000 t", label: "de capacidad productiva anual" },
+        { n: "+12", label: "estados brasileños con obra entregada" },
+        { n: "16", label: "obras de referencia en el portafolio" }
+      ],
+      pilares: [
+        { t: "Ingeniería propia", d: "Proyecto estructural y modelado BIM en Tekla Structures desde la etapa inicial." },
+        { t: "Fábrica CNC", d: "Automatización y corte CNC con precisión milimétrica en cada pieza." },
+        { t: "Logística intermodal", d: "Entrega de proyectos completos cruzando fronteras, en plazo acordado." }
+      ],
+      segmentos: [
+        { num: "01", t: "Cubiertas y galpones", iso: "assets/iso-galpon.webp", d: "Cubiertas con tecnología exclusiva SineJoist®, ideales para centros de distribución y operaciones industriales." },
+        { num: "02", t: "Pisos múltiples", iso: "assets/iso-multipiso.webp", d: "Estructuras para edificaciones verticales: grandes luces, alta capacidad de carga y buen desempeño térmico y acústico." },
+        { num: "03", t: "Industriales", iso: "assets/iso-industrial.webp", d: "Robustez y rapidez constructiva para ambientes de producción intensa, con grandes vanos libres." },
+        { num: "04", t: "Vías y transportes", iso: "assets/iso-viaducto.webp", d: "Puentes, viaductos y pasarelas: durabilidad y montaje optimizado para infraestructura urbana y logística." }
+      ],
+      destacadas: obras.slice(0, 3),
+      obrasFiltradas: f === "Todas" ? obras : obras.filter(o => o.cat === f),
+      filtros: cats.map(c => ({
+        label: c, go: () => this.setState({ filtro: c }),
+        bg: f === c ? "#16452C" : "#FFFFFF",
+        color: f === c ? "#FFFFFF" : "#5B6268",
+        border: f === c ? "#16452C" : "#E3E3DF"
+      })),
+
+      hitos: [
+        { y: "1989", t: "Fundación de Rótula Metalúrgica por el Ing. Pedro Gordilho." },
+        { y: "2000s", t: "Expansión a obras de infraestructura: puentes, viaductos y pasarelas." },
+        { y: "2010s", t: "Adopción del modelado BIM y desarrollo del sistema SineJoist®." },
+        { y: "2026", t: "Apertura de NEX Galpones Paraguay, operación local del grupo." }
+      ],
+      capacidad: [
+        { n: "20.000 t", label: "producción anual" },
+        { n: "Tekla", label: "modelado estructural 3D" },
+        { n: "CNC", label: "corte y armado automatizado" },
+        { n: "Intermodal", label: "logística de exportación" }
+      ],
+      sectores: ["Industria", "Logística", "Retail", "Salud", "Infraestructura", "Sector público"],
+
+      ventajas: [
+        { t: "Velocidad", d: "Componentes prefabricados a medida optimizan plazos y reducen personal en obra." },
+        { t: "Durabilidad", d: "Acero de alta resistencia y galvanizado total para larga vida útil." },
+        { t: "Grandes luces libres", d: "Más libertad de layout y versatilidad en la ocupación del espacio." }
+      ],
+      proceso: [
+        { num: "01", t: "Proyecto", d: "Relevamiento del alcance, anteproyecto estructural y estimación de tonelaje." },
+        { num: "02", t: "Modelado BIM", d: "Cada elemento de acero modelado en 3D con todos los detalles constructivos." },
+        { num: "03", t: "Fabricación", d: "Corte CNC, armado y galvanizado con control dimensional en fábrica." },
+        { num: "04", t: "Montaje", d: "Logística intermodal hasta la obra y montaje con equipo propio." }
+      ],
+
+      contactos: [
+        { label: "Oficina comercial", value: "Asunción, Paraguay" },
+        { label: "Teléfono", value: "+595 21 000 000" },
+        { label: "Email", value: "comercial@nexgalpones.com.py" },
+        { label: "Horario", value: "Lunes a viernes, 8:00 a 17:00" }
+      ],
+      enviado: this.state.enviado,
+      noEnviado: !this.state.enviado,
+      enviar: () => this.setState({ enviado: true }),
+      resetForm: () => this.setState({ enviado: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

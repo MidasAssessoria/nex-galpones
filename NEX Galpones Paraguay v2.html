@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="es-PY">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEX Galpones Paraguay — Ingeniería de clase mundial, fabricada en Paraguay</title>
+<meta name="description" content="Galpones logísticos, naves industriales y estructura pesada con fábrica local en Paraguay. Plazos cortos, flete nacional y el respaldo de +35 años de Rótula Metalúrgica." />
+<!-- Versión concepto (v2): noindex hasta reemplazar a la versión clásica,
+     para no competir con ella en buscadores. -->
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#16452C" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_PY" />
+<meta property="og:site_name" content="NEX Galpones Paraguay" />
+<meta property="og:title" content="Ingeniería de clase mundial. Ahora fabricada en Paraguay." />
+<meta property="og:description" content="Galpones y estructura pesada con fábrica local: plazos cortos, flete nacional, respuesta en Asunción. Respaldo Rótula Metalúrgica, +35 años." />
+<meta property="og:image" content="https://nexgalpones.com.py/assets/hero-galpon.jpg" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2316452C'/%3E%3Cpath d='M14 46V18h7l14 19V18h7v28h-7L21 27v19z' fill='%23fff'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ════════════════════════════════════════════════════════════════════
+   NEX v2 — «edición revista»
+   La página entera da vuelta de claro a oscuro según la sección (la
+   "virada de página"). El body interpola fondo y color; casi todo lo
+   demás hereda currentColor o lo deriva con color-mix, así el giro es
+   uno solo y parejo. Los verdes de marca quedan fijos.
+   ════════════════════════════════════════════════════════════════════ */
+* { box-sizing: border-box; margin: 0; }
+
+:root {
+  --verde: #16452C;
+  --verde-medio: #2E7D4F;
+  --verde-claro: #4CAF6D;
+  --papel: #F5F5F3;
+  --tinta: #14171A;
+  --oscuro: #101613;
+  --profundo: #0A0F0C;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --archivo: "Archivo", sans-serif;
+  /* hairlines y paneles derivados del color de texto vigente */
+  --linea: color-mix(in srgb, currentColor 16%, transparent);
+  --panel: color-mix(in srgb, currentColor 5%, transparent);
+}
+
+body {
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color .85s ease, color .85s ease;
+}
+body[data-tema="oscuro"]   { background: var(--oscuro);   color: var(--papel); }
+body[data-tema="profundo"] { background: var(--profundo); color: var(--papel); }
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+button, input, textarea { font-family: inherit; }
+::selection { background: var(--verde); color: #FFFFFF; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+.wrap { max-width: 1280px; margin: 0 auto; padding-left: clamp(20px, 3vw, 40px); padding-right: clamp(20px, 3vw, 40px); }
+
+/* tipografías utilitarias */
+.mono  { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
+.sub   { opacity: .64; }
+.kick  { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--verde-claro); }
+.kick::before { content: ""; display: inline-block; width: 7px; height: 7px; background: var(--verde-claro); margin-right: 11px; }
+body[data-tema="claro"] .kick { color: var(--verde-medio); }
+
+/* degradados de titular (mismos de la v1) */
+.grad-luz {
+  background: linear-gradient(93deg, #FFFFFF 0%, #C4EFD4 24%, #4CAF6D 66%, #3A9C5D 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.grad-ink {
+  background: linear-gradient(93deg, #14171A 0%, #16452C 42%, #2E7D4F 72%, #4CAF6D 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .grad-luz { color: #4CAF6D; -webkit-text-fill-color: currentColor; background: none; }
+  .grad-ink { color: #2E7D4F; -webkit-text-fill-color: currentColor; background: none; }
+}
+
+/* ── header ─────────────────────────────────────────────────────────── */
+header {
+  position: fixed; inset: 0 0 auto 0; z-index: 60;
+  transition: background-color .85s ease, border-color .85s ease;
+  border-bottom: 1px solid transparent;
+}
+header.solida {
+  background: color-mix(in srgb, var(--fondo-actual, #F5F5F3) 86%, transparent);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom-color: var(--linea);
+}
+.barra { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 64px; }
+.marca { display: flex; align-items: baseline; gap: 10px; text-decoration: none; }
+.marca b { font-family: var(--archivo); font-stretch: 115%; font-weight: 800; font-size: 22px; letter-spacing: -.02em; }
+.marca b::after { content: ""; display: inline-block; width: 8px; height: 8px; background: var(--verde-claro); margin-left: 6px; }
+.marca span { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; opacity: .6; }
+nav.anclas { display: flex; gap: 4px; }
+nav.anclas a {
+  padding: 10px 14px; text-decoration: none;
+  font-family: var(--archivo); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  opacity: .72;
+}
+nav.anclas a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: var(--verde-claro); text-decoration-thickness: 2px; }
+.cta {
+  display: inline-block; background: var(--verde); color: #FFFFFF; border: 0; cursor: pointer; text-decoration: none;
+  padding: 13px 22px; font-family: var(--archivo); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  transition: background-color .2s ease, transform .2s ease;
+}
+.cta:hover { background: var(--verde-medio); }
+.cta:active { transform: translateY(1px); }
+@media (max-width: 900px) { nav.anclas { display: none; } }
+
+/* ── folio lateral ──────────────────────────────────────────────────── */
+#folio {
+  position: fixed; right: clamp(14px, 2vw, 28px); top: 50%; transform: translateY(-50%);
+  z-index: 55; display: flex; flex-direction: column; align-items: center; gap: 14px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+}
+#folio .num { font-weight: 600; }
+#folio .nombre { writing-mode: vertical-rl; text-transform: uppercase; opacity: .55; }
+#folio .pista { width: 1px; height: 110px; background: var(--linea); position: relative; }
+#folio .pista i { position: absolute; top: 0; left: 0; width: 100%; height: 0%; background: var(--verde-claro); }
+@media (max-width: 1120px) { #folio { display: none; } }
+
+/* ── secciones ──────────────────────────────────────────────────────── */
+section { position: relative; scroll-margin-top: 64px; }
+.acto { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; opacity: .55; }
+
+/* HERO */
+#inicio { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-top: 96px; }
+.hero-cifra {
+  font-family: var(--archivo); font-stretch: 115%; font-weight: 800; letter-spacing: -.04em;
+  font-size: clamp(56px, 19vw, 216px); line-height: .92;
+  font-variant-numeric: tabular-nums;
+  min-height: 1.05em; position: relative; overflow: hidden;
+}
+.hero-cifra .giro { position: absolute; inset: 0; display: block; opacity: 0; transform: translateY(105%); }
+.hero-cifra .giro.activa { position: relative; opacity: 1; transform: none; }
+.hero-cifra .unidad { font-size: .32em; font-weight: 700; color: var(--verde-medio); letter-spacing: -.01em; margin-left: .08em; }
+.hero-pie { margin-top: 10px; font-family: var(--mono); font-size: clamp(12px, 1.3vw, 14px); letter-spacing: .12em; text-transform: uppercase; opacity: .6; min-height: 1.4em; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-cifra .giro { transition: opacity .55s cubic-bezier(.16,.84,.44,1), transform .55s cubic-bezier(.16,.84,.44,1); }
+}
+.hero-h1 { margin-top: clamp(28px, 4vw, 52px); font-family: var(--archivo); font-stretch: 115%; font-weight: 800; letter-spacing: -.025em; font-size: clamp(26px, 3.6vw, 48px); line-height: 1.06; max-width: 900px; }
+.hero-sub { margin-top: 20px; max-width: 640px; font-size: clamp(16px, 1.4vw, 18px); line-height: 1.65; opacity: .78; }
+.hero-acciones { display: flex; gap: 14px; flex-wrap: wrap; margin-top: clamp(28px, 3.5vw, 44px); }
+.boton-linea {
+  display: inline-block; background: transparent; color: inherit; cursor: pointer; text-decoration: none;
+  border: 1px solid var(--linea); padding: 16px 26px;
+  font-family: var(--archivo); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  transition: border-color .2s ease, background-color .2s ease;
+}
+.boton-linea:hover { border-color: var(--verde-claro); background: color-mix(in srgb, var(--verde-claro) 8%, transparent); }
+.cta.grande, .boton-linea.grande { padding: 18px 32px; }
+.hero-borde { display: flex; justify-content: space-between; gap: 20px; padding: 18px 0 22px; border-top: 1px solid var(--linea); margin-top: clamp(40px, 7vh, 88px); }
+.hero-borde span { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; opacity: .55; }
+@media (max-width: 700px) { .hero-borde span:nth-child(2) { display: none; } }
+
+/* MANIFIESTO */
+#manifiesto { padding: clamp(90px, 16vh, 180px) 0; }
+.manifiesto {
+  margin-top: 34px; max-width: 980px;
+  font-family: var(--archivo); font-stretch: 112%; font-weight: 700; letter-spacing: -.015em;
+  font-size: clamp(24px, 3.4vw, 46px); line-height: 1.28;
+}
+.manifiesto .pal { opacity: .14; }
+.manifiesto .pal.on { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .manifiesto .pal { transition: opacity .35s ease; }
+}
+.manifiesto .acento { color: var(--verde-claro); }
+
+/* CAPACIDAD (odómetro) */
+#capacidad { padding-bottom: clamp(80px, 12vh, 150px); }
+.tablero { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--linea); }
+.tablero > div { padding: clamp(24px, 3vw, 44px) clamp(16px, 2vw, 32px) clamp(24px, 3vw, 44px) 0; border-right: 1px solid var(--linea); }
+.tablero > div:last-child { border-right: 0; }
+.odo { font-family: var(--archivo); font-stretch: 115%; font-weight: 800; letter-spacing: -.03em; font-size: clamp(30px, 3.6vw, 56px); line-height: 1; display: flex; }
+.odo .col { height: 1em; overflow: hidden; }
+.odo .col b { display: block; font-weight: inherit; }
+@media (prefers-reduced-motion: no-preference) {
+  .odo .col b { transition: transform 1.6s cubic-bezier(.16,.84,.3,1); }
+}
+.odo .fijo { display: block; }
+.tablero .etq { margin-top: 14px; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .58; line-height: 1.7; }
+.tablero .etq b { color: var(--verde-claro); font-weight: 600; }
+@media (max-width: 980px) { .tablero { grid-template-columns: 1fr 1fr; } .tablero > div:nth-child(2n) { border-right: 0; } }
+@media (max-width: 520px) { .tablero { grid-template-columns: 1fr; } .tablero > div { border-right: 0; border-bottom: 1px solid var(--linea); } .tablero > div:last-child { border-bottom: 0; } }
+
+/* OBRAS — portadas */
+#obras { padding: clamp(80px, 12vh, 150px) 0 clamp(90px, 14vh, 170px); }
+.obras-cab { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; flex-wrap: wrap; margin-bottom: 40px; }
+.obras-cab h2 { font-family: var(--archivo); font-stretch: 115%; font-weight: 800; letter-spacing: -.025em; font-size: clamp(30px, 4vw, 54px); line-height: 1.04; }
+.vista-toggle { display: inline-flex; border: 1px solid var(--linea); }
+.vista-toggle button {
+  background: transparent; color: inherit; border: 0; cursor: pointer; padding: 12px 20px;
+  font-family: var(--archivo); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .55;
+}
+.vista-toggle button[aria-pressed="true"] { background: var(--verde); color: #fff; opacity: 1; }
+.rail-zona { position: relative; }
+.rail {
+  display: flex; gap: clamp(16px, 2vw, 28px);
+  overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 18px;
+  scrollbar-width: none; cursor: grab;
+}
+.rail::-webkit-scrollbar { display: none; }
+.rail.arrastrando { cursor: grabbing; scroll-snap-type: none; }
+.portada {
+  position: relative; flex: 0 0 auto; scroll-snap-align: start; overflow: hidden;
+  width: clamp(280px, 74vw, 460px); aspect-ratio: 4 / 5; background: #1A211D; color: #FFFFFF;
+  display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(20px, 2.4vw, 32px);
+}
+.portada > img.fondo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.portada .velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,15,12,.18) 0%, rgba(10,15,12,.28) 45%, rgba(10,15,12,.86) 100%); }
+.portada > div { position: relative; }
+.p-cat { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #BFEDD0; }
+.p-cifra { margin-top: 10px; font-family: var(--archivo); font-stretch: 115%; font-weight: 800; letter-spacing: -.03em; font-size: clamp(44px, 5.4vw, 68px); line-height: .95; font-variant-numeric: tabular-nums; }
+.p-cifra .u { font-size: .42em; font-weight: 700; color: var(--verde-claro); }
+.p-frase { margin-top: 10px; font-family: var(--archivo); font-stretch: 115%; font-weight: 800; letter-spacing: -.02em; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.08; }
+.p-frase i { display: block; font-style: normal; color: var(--verde-claro); font-size: .62em; margin-top: 8px; }
+.p-obra { margin-top: 12px; font-weight: 600; font-size: 15px; }
+.p-loc { margin-top: 3px; font-size: 13px; opacity: .62; }
+.portada--tipo { background: var(--verde); padding: 0; justify-content: flex-start; }
+.portada--tipo .cuerpo { padding: clamp(20px, 2.4vw, 32px); display: flex; flex-direction: column; flex: 1; }
+.portada--tipo .p-cifra { font-size: clamp(56px, 6.6vw, 84px); margin-top: 14px; }
+.portada--tipo .p-obra { margin-top: auto; padding-top: 18px; }
+.portada--tipo img.banda { width: 100%; height: clamp(120px, 18vw, 170px); object-fit: cover; opacity: .92; }
+@media (prefers-reduced-motion: no-preference) {
+  .portada > img.fondo { transition: transform .8s cubic-bezier(.16,.84,.44,1); }
+  .portada:hover > img.fondo { transform: scale(1.045); }
+}
+.rail-pie { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 8px; }
+.rail-pie .cuenta { font-family: var(--mono); font-size: 12px; letter-spacing: .16em; }
+.rail-nav { display: flex; gap: 8px; }
+.rail-nav button {
+  width: 46px; height: 46px; background: transparent; color: inherit; border: 1px solid var(--linea);
+  font-size: 18px; cursor: pointer; transition: border-color .2s, background-color .2s;
+}
+.rail-nav button:hover { border-color: var(--verde-claro); background: color-mix(in srgb, var(--verde-claro) 10%, transparent); }
+
+/* OBRAS — tabla técnica */
+.tecnica { display: none; }
+.tecnica.visible { display: block; }
+.rail-zona.oculta { display: none; }
+.tabla-marco { overflow-x: auto; border: 1px solid var(--linea); }
+table.obras { width: 100%; min-width: 720px; border-collapse: collapse; font-size: 14px; }
+table.obras th, table.obras td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--linea); }
+table.obras th {
+  font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  opacity: .6; cursor: pointer; user-select: none; white-space: nowrap;
+}
+table.obras th:hover { opacity: 1; color: var(--verde-claro); }
+table.obras th .flecha { opacity: 0; margin-left: 6px; }
+table.obras th[aria-sort] { opacity: 1; color: var(--verde-claro); }
+table.obras th[aria-sort] .flecha { opacity: 1; }
+table.obras td.num { font-family: var(--mono); font-weight: 500; white-space: nowrap; }
+table.obras td.nombre { font-family: var(--archivo); font-weight: 700; font-size: 15px; letter-spacing: -.01em; }
+table.obras td.dim { font-family: var(--mono); font-weight: 600; white-space: nowrap; }
+table.obras tbody tr { transition: background-color .15s ease; }
+table.obras tbody tr:hover { background: color-mix(in srgb, var(--verde-claro) 7%, transparent); }
+table.obras tr:last-child td { border-bottom: 0; }
+.tabla-nota { margin-top: 14px; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .5; }
+
+/* EXXON — clímax documental */
+#exxon { min-height: 94svh; display: flex; align-items: flex-end; overflow: hidden; }
+#exxon .fondo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .55; }
+#exxon .velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,15,12,.55) 0%, rgba(10,15,12,.2) 45%, rgba(10,15,12,.92) 100%); }
+#exxon .wrap { position: relative; width: 100%; padding-top: clamp(90px, 16vh, 170px); padding-bottom: clamp(50px, 8vh, 90px); color: #F5F5F3; }
+#exxon h2 { margin-top: 18px; max-width: 820px; font-family: var(--archivo); font-stretch: 115%; font-weight: 800; letter-spacing: -.025em; font-size: clamp(28px, 3.8vw, 52px); line-height: 1.05; }
+.cartela { margin-top: clamp(30px, 5vh, 54px); max-width: 560px; border: 1px solid rgba(245,245,243,.25); background: rgba(10,15,12,.55); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); padding: clamp(18px, 2.4vw, 28px); }
+.cartela .linea {
+  display: flex; align-items: baseline; gap: 12px; padding: 9px 0;
+  font-family: var(--mono); font-size: clamp(12px, 1.3vw, 14px); letter-spacing: .12em; text-transform: uppercase;
+  opacity: 0; transform: translateY(8px);
+}
+.cartela .linea .k { flex: none; opacity: .55; }
+.cartela .linea .puntos { flex: 1; border-bottom: 1px dotted rgba(245,245,243,.35); transform: translateY(-4px); }
+.cartela .linea .v { flex: none; font-weight: 600; color: #C4EFD4; }
+.cartela.on .linea { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .cartela .linea { transition: opacity .5s ease, transform .5s ease; }
+  .cartela.on .linea:nth-child(1) { transition-delay: .1s; }
+  .cartela.on .linea:nth-child(2) { transition-delay: .5s; }
+  .cartela.on .linea:nth-child(3) { transition-delay: .9s; }
+  .cartela.on .linea:nth-child(4) { transition-delay: 1.3s; }
+}
+#exxon .remate { margin-top: 26px; font-size: 17px; line-height: 1.6; opacity: .82; max-width: 560px; }
+#exxon .remate b { color: var(--verde-claro); }
+
+/* SISTEMA — plancheta */
+#sistema { padding: clamp(90px, 14vh, 170px) 0; }
+#sistema .plano {
+  margin-top: 44px; border: 1px solid var(--linea);
+  background:
+    repeating-linear-gradient(0deg,   transparent 0 31px, color-mix(in srgb, currentColor 7%, transparent) 31px 32px),
+    repeating-linear-gradient(90deg,  transparent 0 31px, color-mix(in srgb, currentColor 7%, transparent) 31px 32px);
+  display: grid; grid-template-columns: minmax(280px, 1fr) minmax(300px, 1.1fr); gap: clamp(24px, 4vw, 64px);
+  padding: clamp(24px, 4vw, 56px);
+}
+.plancheta { position: relative; max-width: 380px; margin: 0 auto; }
+.plancheta img { width: 100%; }
+.punto { position: absolute; display: flex; align-items: center; gap: 0; pointer-events: none; }
+.punto .n {
+  flex: none; width: 22px; height: 22px; border: 1px solid var(--verde-medio); background: var(--papel);
+  color: var(--verde-medio); font-family: var(--mono); font-size: 11px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+.punto .guia { height: 1px; border-top: 1px dashed var(--verde-medio); width: 0; }
+.plancheta.on .punto .guia { width: var(--largo, 60px); }
+@media (prefers-reduced-motion: no-preference) {
+  .punto .guia { transition: width 1s cubic-bezier(.16,.84,.44,1) .3s; }
+}
+.leyenda { display: flex; flex-direction: column; justify-content: center; gap: 0; }
+.leyenda .item { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--linea); }
+.leyenda .item:last-of-type { border-bottom: 0; }
+.leyenda .item .n { flex: none; font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--verde-medio); padding-top: 3px; }
+.leyenda .item h3 { font-family: var(--archivo); font-stretch: 115%; font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+.leyenda .item p { margin-top: 5px; font-size: 14px; line-height: 1.55; opacity: .66; }
+.rotulo { margin-top: 26px; border: 1px solid var(--linea); font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.rotulo div { display: grid; grid-template-columns: 120px 1fr; border-bottom: 1px solid var(--linea); }
+.rotulo div:last-child { border-bottom: 0; }
+.rotulo span { padding: 9px 12px; }
+.rotulo span:first-child { border-right: 1px solid var(--linea); opacity: .55; }
+.rotulo b { font-weight: 600; color: var(--verde-medio); }
+@media (max-width: 900px) { #sistema .plano { grid-template-columns: 1fr; } .punto { display: none; } }
+
+/* PARAGUAY */
+#paraguay { padding: clamp(90px, 14vh, 170px) 0; }
+.py-grid { display: grid; grid-template-columns: minmax(280px, .9fr) 1.1fr; gap: clamp(28px, 5vw, 80px); align-items: center; margin-top: 44px; }
+#py-svg { width: 100%; max-width: 460px; display: block; margin: 0 auto; }
+.py-texto h2 { font-family: var(--archivo); font-stretch: 115%; font-weight: 800; letter-spacing: -.025em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.05; }
+.py-texto .lastro { margin-top: 18px; font-size: 17px; line-height: 1.65; opacity: .74; max-width: 560px; }
+.py-razones { margin-top: 34px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--linea); border: 1px solid var(--linea); }
+.py-razones div { background: var(--fondo-panel, #F5F5F3); padding: 20px 18px; }
+body[data-tema="claro"] .py-razones div { --fondo-panel: #FFFFFF; }
+.py-razones h3 { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--verde-medio); }
+.py-razones p { margin-top: 9px; font-size: 14px; line-height: 1.55; opacity: .74; }
+@media (max-width: 900px) { .py-grid { grid-template-columns: 1fr; } .py-razones { grid-template-columns: 1fr; } }
+.ruta { margin-top: clamp(48px, 8vh, 80px); border-top: 1px solid var(--linea); padding-top: 34px; }
+.ruta-linea { display: grid; grid-template-columns: auto 1fr auto 1fr auto; align-items: center; gap: 14px; }
+.nodo { text-align: center; }
+.nodo .p { width: 11px; height: 11px; border: 2px solid var(--verde-medio); background: transparent; border-radius: 50%; margin: 0 auto; }
+.nodo.lleno .p { background: var(--verde-claro); border-color: var(--verde-claro); }
+.nodo .c { margin-top: 10px; font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .12em; }
+.nodo .g { margin-top: 3px; font-family: var(--mono); font-size: 10px; letter-spacing: .08em; opacity: .5; }
+.tramo { height: 1px; border-top: 1px dashed color-mix(in srgb, currentColor 42%, transparent); position: relative; }
+.tramo::after {
+  content: "→"; position: absolute; right: -2px; top: -11px; font-size: 13px; color: var(--verde-medio);
+}
+@media (max-width: 700px) {
+  .ruta-linea { grid-template-columns: 1fr; gap: 10px; }
+  .tramo { width: 1px; height: 26px; border-top: 0; border-left: 1px dashed color-mix(in srgb, currentColor 42%, transparent); margin: 0 auto; }
+  .tramo::after { content: "↓"; right: auto; left: -6px; top: auto; bottom: -4px; }
+}
+
+/* CONTACTO — eco de m² */
+#contacto { padding: clamp(90px, 14vh, 170px) 0; overflow: hidden; }
+.eco-zona { position: relative; margin-top: 44px; }
+#eco {
+  position: absolute; right: -1%; top: 50%; transform: translateY(-50%);
+  font-family: var(--archivo); font-stretch: 115%; font-weight: 800; letter-spacing: -.03em;
+  font-size: clamp(90px, 15vw, 230px); line-height: 1; white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--verde-claro) 45%, transparent);
+  pointer-events: none; user-select: none; z-index: 0;
+}
+#eco.lleno { color: color-mix(in srgb, var(--verde-claro) 16%, transparent); -webkit-text-stroke-color: color-mix(in srgb, var(--verde-claro) 70%, transparent); }
+#eco .u { font-size: .4em; }
+.formulario { position: relative; z-index: 1; max-width: 620px; }
+.formulario .campo { margin-bottom: 22px; }
+.formulario label { display: block; font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; opacity: .6; }
+.formulario input, .formulario textarea {
+  width: 100%; margin-top: 8px; background: transparent; color: inherit;
+  border: 0; border-bottom: 1px solid var(--linea); padding: 12px 0; font-size: 17px; outline: none; border-radius: 0;
+}
+.formulario input:focus, .formulario textarea:focus { border-bottom-color: var(--verde-claro); }
+.formulario input.err, .formulario textarea.err { border-bottom-color: #D95C4A; }
+.formulario textarea { resize: vertical; min-height: 96px; }
+.form-fila { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+@media (max-width: 640px) { .form-fila { grid-template-columns: 1fr; } }
+.form-pie { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 30px; }
+.form-nota { margin-top: 18px; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; opacity: .5; }
+#form-ok { display: none; padding: 34px 0 10px; }
+#form-ok.visible { display: block; }
+#form-ok h3 { font-family: var(--archivo); font-stretch: 115%; font-size: 26px; font-weight: 800; letter-spacing: -.02em; color: var(--verde-claro); }
+#form-ok p { margin-top: 12px; max-width: 460px; line-height: 1.65; opacity: .78; }
+
+/* COLOFÓN */
+footer { padding: clamp(70px, 10vh, 120px) 0 40px; text-align: center; }
+footer .marca { justify-content: center; }
+footer .frase { margin-top: 22px; font-family: var(--archivo); font-stretch: 115%; font-weight: 800; letter-spacing: -.02em; font-size: clamp(20px, 2.4vw, 30px); }
+footer .datos { margin-top: 26px; display: flex; justify-content: center; gap: 10px 28px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .6; }
+footer .datos a { text-decoration: none; }
+footer .datos a:hover { color: var(--verde-claro); }
+footer .legal { margin-top: 34px; padding-top: 26px; border-top: 1px solid var(--linea); font-size: 12px; opacity: .5; }
+footer .escala { margin-top: 44px; font-family: var(--mono); font-size: clamp(11px, 1.4vw, 14px); font-weight: 600; letter-spacing: .34em; text-transform: uppercase; color: var(--verde-claro); }
+
+/* WhatsApp flotante */
+#wsp {
+  position: fixed; right: clamp(16px, 3vw, 28px); bottom: calc(clamp(16px, 3vw, 28px) + env(safe-area-inset-bottom));
+  z-index: 58; width: 54px; height: 54px; background: var(--verde);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 12px 30px rgba(11, 25, 17, .38); transition: background-color .2s ease;
+}
+#wsp:hover { background: var(--verde-medio); }
+
+/* revelado suave genérico */
+.rev { opacity: 0; transform: translateY(16px); }
+.rev.vis { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .rev { transition: opacity .6s cubic-bezier(.16,.84,.44,1), transform .6s cubic-bezier(.16,.84,.44,1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rev { opacity: 1; transform: none; }
+  .manifiesto .pal { opacity: 1; }
+  .cartela .linea { opacity: 1; transform: none; }
+  .plancheta .punto .guia { width: var(--largo, 60px); }
+}
+</style>
+</head>
+<body data-tema="claro">
+
+<header id="cabecera">
+  <div class="wrap barra">
+    <a class="marca" href="#inicio" aria-label="NEX Galpones Paraguay — inicio">
+      <b>NEX</b><span>Galpones Paraguay</span>
+    </a>
+    <nav class="anclas" aria-label="Secciones">
+      <a href="#obras">Obras</a>
+      <a href="#sistema">Sistema</a>
+      <a href="#paraguay">Paraguay</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="cta" href="#contacto">Contanos tu obra</a>
+  </div>
+</header>
+
+<div id="folio" aria-hidden="true">
+  <span class="num">01</span>
+  <span class="pista"><i></i></span>
+  <span class="nombre">Portada</span>
+</div>
+
+<a id="wsp" href="https://wa.me/595000000000" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFFFFF'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z'/%3E%3C/svg%3E" alt="" width="25" height="25" style="width:25px; height:25px;" />
+</a>
+
+<main>
+
+  <!-- ═══ 01 · PORTADA ═══════════════════════════════════════════════ -->
+  <section id="inicio" data-tema="claro" data-folio="Portada">
+    <div class="wrap">
+      <div class="kick">NEX Galpones Paraguay · Estructuras metálicas</div>
+
+      <div class="hero-cifra" id="rotador" aria-hidden="true">
+        <span class="giro activa">85.000<span class="unidad">m²</span></span>
+        <span class="giro">1.200<span class="unidad">ton</span></span>
+        <span class="giro">+35<span class="unidad">años</span></span>
+      </div>
+      <div class="hero-pie" id="rotador-pie" aria-hidden="true">de galpón logístico en una sola obra</div>
+      <p class="visualmente-oculto" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);">85.000 m² de galpón logístico en una sola obra. 1.200 toneladas exportadas a ExxonMobil. Más de 35 años fabricando estructura pesada.</p>
+
+      <h1 class="hero-h1">Ingeniería de clase mundial. <span class="grad-ink">Ahora fabricada en Paraguay.</span></h1>
+      <p class="hero-sub">Galpones logísticos, naves industriales y estructura pesada con fábrica local: plazos más cortos, flete nacional y respuesta en Asunción. El respaldo: Rótula Metalúrgica, +35 años.</p>
+      <div class="hero-acciones">
+        <a class="cta grande" href="#contacto">Contanos tu obra</a>
+        <a class="boton-linea grande" href="#obras">Ver las obras</a>
+      </div>
+
+      <div class="hero-borde">
+        <span>01 / Manifiesto ↓</span>
+        <span>20.000 t/año · Esc. 1:1</span>
+        <span>Asunción · PY</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 02 · MANIFIESTO ════════════════════════════════════════════ -->
+  <section id="manifiesto" data-tema="oscuro" data-folio="Manifiesto">
+    <div class="wrap">
+      <div class="acto">01 / Manifiesto</div>
+      <p class="manifiesto" id="mani">Durante más de 35 años fabricamos el acero de galpones, shoppings, hospitales y estadios. Lo montamos en 12 estados de Brasil y lo exportamos hasta Guyana. Hoy ese mismo acero se fabrica acá, del lado paraguayo de la frontera. Porque tu obra no tiene por qué esperar a otro país.</p>
+    </div>
+  </section>
+
+  <!-- ═══ capacidad · odómetro ═══════════════════════════════════════ -->
+  <section id="capacidad" data-tema="oscuro" data-folio="Capacidad">
+    <div class="wrap">
+      <div class="tablero" id="tablero">
+        <div>
+          <div class="odo" data-odo="20.000"></div>
+          <div class="etq"><b>t / año</b><br>de capacidad de producción</div>
+        </div>
+        <div>
+          <div class="odo" data-odo="+500.000"></div>
+          <div class="etq"><b>m²</b><br>de obra entregada</div>
+        </div>
+        <div>
+          <div class="odo" data-odo="3"></div>
+          <div class="etq"><b>países</b><br>Brasil · Paraguay · Guyana</div>
+        </div>
+        <div>
+          <div class="odo" data-odo="+35"></div>
+          <div class="etq"><b>años</b><br>de ingeniería continua, desde 1989</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 02 · OBRAS — portadas de revista ═══════════════════════════ -->
+  <section id="obras" data-tema="oscuro" data-folio="Obras">
+    <div class="wrap">
+      <div class="obras-cab">
+        <div>
+          <div class="acto">02 / Obras</div>
+          <h2 style="margin-top:16px;">Cada obra es<br>una portada.</h2>
+        </div>
+        <div class="vista-toggle" role="group" aria-label="Modo de vista del portafolio">
+          <button type="button" id="btn-revista" aria-pressed="true">Vista revista</button>
+          <button type="button" id="btn-tecnica" aria-pressed="false">Vista técnica</button>
+        </div>
+      </div>
+
+      <div class="rail-zona" id="zona-revista">
+        <div class="rail" id="rail" tabindex="0" aria-label="Obras destacadas — deslizá horizontalmente">
+
+          <article class="portada portada--tipo">
+            <div class="cuerpo">
+              <div class="p-cat">Pisos múltiples</div>
+              <div class="p-cifra">110.000<span class="u"> m²</span></div>
+              <div class="p-frase" style="font-size:clamp(17px,1.8vw,22px); opacity:.85;">La obra más grande del portafolio.</div>
+              <div class="p-obra">Shopping Bela Vista</div>
+              <div class="p-loc">Salvador · Bahía</div>
+            </div>
+            <img class="banda" src="assets/p16-shopping-bela-vista-110000m2-2.jpg" alt="Shopping Bela Vista concluido" loading="lazy" />
+          </article>
+
+          <article class="portada">
+            <img class="fondo" src="assets/p11-galpao-lyon-85000m2-0.jpg" alt="" loading="lazy" />
+            <div class="velo"></div>
+            <div>
+              <div class="p-cat">Cubiertas y galpones</div>
+              <div class="p-cifra">85.000<span class="u"> m²</span></div>
+              <div class="p-obra">Galpón Lyon</div>
+              <div class="p-loc">Simões Filho · Bahía</div>
+            </div>
+          </article>
+
+          <article class="portada">
+            <img class="fondo" src="assets/p09-galpao-cone-65000m2-1.jpg" alt="" loading="lazy" />
+            <div class="velo"></div>
+            <div>
+              <div class="p-cat">Cubiertas y galpones</div>
+              <div class="p-cifra">65.000<span class="u"> m²</span></div>
+              <div class="p-obra">Galpón Cone</div>
+              <div class="p-loc">Cabo de Santo Agostinho · Pernambuco</div>
+            </div>
+          </article>
+
+          <article class="portada">
+            <img class="fondo" src="assets/castelao.jpg" alt="" loading="lazy" />
+            <div class="velo"></div>
+            <div>
+              <div class="p-cat">Estadios · 4.200 ton</div>
+              <div class="p-frase">Sede del Mundial FIFA 2014.<i>Sí, también la hicimos.</i></div>
+              <div class="p-obra">Arena Castelão</div>
+              <div class="p-loc">Fortaleza · Ceará</div>
+            </div>
+          </article>
+
+          <article class="portada">
+            <img class="fondo" src="assets/portada-samel.jpg" alt="" loading="lazy" />
+            <div class="velo"></div>
+            <div>
+              <div class="p-cat">Pisos múltiples</div>
+              <div class="p-cifra">12.500<span class="u"> m²</span></div>
+              <div class="p-frase" style="font-size:clamp(17px,1.8vw,22px); opacity:.85;">Un hospital entero en acero.</div>
+              <div class="p-obra">Hospital Samel</div>
+              <div class="p-loc">Manaus · Amazonas</div>
+            </div>
+          </article>
+
+          <article class="portada portada--tipo">
+            <div class="cuerpo">
+              <div class="p-cat">Vías y transportes</div>
+              <div class="p-cifra">550<span class="u"> ton</span></div>
+              <div class="p-frase" style="font-size:clamp(17px,1.8vw,22px); opacity:.85;">Acero que también cruza avenidas.</div>
+              <div class="p-obra">Viaducto Complejo Imbuí</div>
+              <div class="p-loc">Salvador · Bahía</div>
+            </div>
+            <img class="banda" src="assets/p19-viaduto-imbui-550ton-3.jpg" alt="Viaducto Imbuí concluido" loading="lazy" />
+          </article>
+
+        </div>
+        <div class="rail-pie">
+          <span class="cuenta" id="rail-cuenta">01 / 06</span>
+          <div class="rail-nav">
+            <button type="button" id="rail-ant" aria-label="Obra anterior">‹</button>
+            <button type="button" id="rail-sig" aria-label="Obra siguiente">›</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tecnica" id="zona-tecnica">
+        <div class="tabla-marco">
+          <table class="obras" id="tabla-obras">
+            <thead>
+              <tr>
+                <th data-orden="i">#<span class="flecha">↓</span></th>
+                <th data-orden="t">Obra<span class="flecha">↓</span></th>
+                <th data-orden="cat">Categoría<span class="flecha">↓</span></th>
+                <th data-orden="loc">Ubicación<span class="flecha">↓</span></th>
+                <th data-orden="dim">Dimensión<span class="flecha">↓</span></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="tabla-nota">Superficies en m² · estructuras en toneladas — 17 obras, esc. 1:1</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ clímax · EXXONMOBIL ════════════════════════════════════════ -->
+  <section id="exxon" data-tema="profundo" data-folio="Exxon">
+    <img class="fondo" src="assets/portada-exxon.jpg" alt="" loading="lazy" />
+    <div class="velo"></div>
+    <div class="wrap">
+      <div class="kick">Registro / Exportación</div>
+      <h2>Cuando ExxonMobil necesitó acero en Guyana, salió de nuestra fábrica.</h2>
+      <div class="cartela" id="cartela" role="figure" aria-label="Ficha de la obra ExxonMobil">
+        <div class="linea"><span class="k">Cliente</span><span class="puntos"></span><span class="v">ExxonMobil</span></div>
+        <div class="linea"><span class="k">País</span><span class="puntos"></span><span class="v">Guyana</span></div>
+        <div class="linea"><span class="k">Estructura</span><span class="puntos"></span><span class="v">1.200 toneladas</span></div>
+        <div class="linea"><span class="k">Estado</span><span class="puntos"></span><span class="v">Entregada</span></div>
+      </div>
+      <p class="remate">Exportar estructura pesada no es la excepción. <b>Es la rutina.</b></p>
+    </div>
+  </section>
+
+  <!-- ═══ 03 · SISTEMA — plancheta ═══════════════════════════════════ -->
+  <section id="sistema" data-tema="claro" data-folio="Sistema">
+    <div class="wrap">
+      <div class="acto">03 / Sistema</div>
+      <h2 style="margin-top:16px; font-family:var(--archivo); font-stretch:115%; font-weight:800; letter-spacing:-.025em; font-size:clamp(30px,4vw,54px); line-height:1.04;"><span class="grad-ink">SINEJOIST®</span>, en plancheta.</h2>
+      <p style="margin-top:18px; max-width:620px; font-size:17px; line-height:1.65; opacity:.74;">Nuestro sistema propio de cubierta metálica: vigas de alma senoidal con inercia variable y correas tipo joist galvanizadas. Liviano, robusto y de montaje rápido.</p>
+
+      <div class="plano">
+        <div class="plancheta" id="plancheta">
+          <img src="assets/iso-sinejoist.webp" alt="Despiece del sistema SineJoist: chapa de cubierta, correa joist, viga de alma senoidal y pilar" loading="lazy" width="900" height="1527" />
+          <span class="punto" style="left:58%; top:7%;  --largo:42%;"><span class="n">1</span><span class="guia"></span></span>
+          <span class="punto" style="left:52%; top:34%; --largo:48%;"><span class="n">2</span><span class="guia"></span></span>
+          <span class="punto" style="left:56%; top:60%; --largo:44%;"><span class="n">3</span><span class="guia"></span></span>
+          <span class="punto" style="left:48%; top:88%; --largo:52%;"><span class="n">4</span><span class="guia"></span></span>
+        </div>
+        <div class="leyenda">
+          <div class="item"><span class="n">1</span><div><h3>Chapa de cubierta</h3><p>Cierre superior continuo, listo para aislación y captación pluvial.</p></div></div>
+          <div class="item"><span class="n">2</span><div><h3>Correa tipo joist galvanizada</h3><p>Celosía liviana que reparte la carga y acelera el montaje.</p></div></div>
+          <div class="item"><span class="n">3</span><div><h3>Viga de alma senoidal</h3><p>Inercia variable: más acero donde trabaja, menos donde no hace falta.</p></div></div>
+          <div class="item"><span class="n">4</span><div><h3>Pilar metálico</h3><p>Grandes luces libres para que el layout mande sobre la estructura.</p></div></div>
+          <div class="rotulo" aria-label="Rótulo técnico">
+            <div><span>Sistema</span><span><b>SINEJOIST®</b> · propio</span></div>
+            <div><span>Tipo</span><span>Viga alma senoidal + correa joist</span></div>
+            <div><span>Protección</span><span>Galvanizado total</span></div>
+            <div><span>Ventaja</span><span>Liviano · montaje rápido · grandes luces</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 04 · PARAGUAY ══════════════════════════════════════════════ -->
+  <section id="paraguay" data-tema="claro" data-folio="Paraguay">
+    <div class="wrap">
+      <div class="acto">04 / Paraguay</div>
+      <div class="py-grid">
+        <svg id="py-svg" viewBox="0 0 460 300" role="img" aria-label="PY, iniciales de Paraguay, llenándose de verde">
+          <defs>
+            <clipPath id="py-clip"><rect id="py-rect" x="0" y="300" width="460" height="0" /></clipPath>
+          </defs>
+          <text x="50%" y="245" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="280" letter-spacing="-8" fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="1.5">PY</text>
+          <text x="50%" y="245" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="280" letter-spacing="-8" fill="#2E7D4F" clip-path="url(#py-clip)">PY</text>
+        </svg>
+        <div class="py-texto">
+          <h2>La ingeniería cruzó la frontera. <span class="grad-ink">La fábrica también.</span></h2>
+          <p class="lastro">NEX es la operación paraguaya del grupo Rótula Metalúrgica. La experiencia viene de +35 años y 12 estados de Brasil; la fabricación, el equipo y la respuesta están acá.</p>
+          <div class="py-razones">
+            <div><h3>Plazo</h3><p>Fabricación local: tu cronograma no espera una aduana.</p></div>
+            <div><h3>Flete</h3><p>Logística nacional hasta tu obra, no un flete internacional.</p></div>
+            <div><h3>Respuesta</h3><p>Equipo comercial y técnico en Asunción, en tu horario.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ruta" id="ruta">
+        <div class="ruta-linea">
+          <div class="nodo"><span class="p"></span><div class="c">Salvador · Matriz</div><div class="g">12°58′S 38°30′W</div></div>
+          <div class="tramo"></div>
+          <div class="nodo lleno"><span class="p"></span><div class="c">Asunción · NEX</div><div class="g">25°16′S 57°38′W</div></div>
+          <div class="tramo"></div>
+          <div class="nodo"><span class="p"></span><div class="c">Georgetown · Obra</div><div class="g">6°48′N 58°10′W</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 05 · CONTACTO — eco de m² ══════════════════════════════════ -->
+  <section id="contacto" data-tema="oscuro" data-folio="Contacto">
+    <div class="wrap">
+      <div class="acto">05 / Contacto</div>
+      <h2 style="margin-top:16px; font-family:var(--archivo); font-stretch:115%; font-weight:800; letter-spacing:-.025em; font-size:clamp(30px,4vw,54px); line-height:1.04;">Contanos <span class="grad-luz">tu obra.</span></h2>
+
+      <div class="eco-zona">
+        <div id="eco" aria-hidden="true">— <span class="u">m²</span></div>
+
+        <form class="formulario" id="form" novalidate>
+          <div class="form-fila">
+            <div class="campo"><label for="f-nombre">Nombre *</label><input id="f-nombre" name="nombre" type="text" autocomplete="name" placeholder="Nombre y apellido" /></div>
+            <div class="campo"><label for="f-empresa">Empresa</label><input id="f-empresa" name="empresa" type="text" autocomplete="organization" placeholder="Razón social" /></div>
+          </div>
+          <div class="form-fila">
+            <div class="campo"><label for="f-contacto">Email o WhatsApp *</label><input id="f-contacto" name="contacto" type="text" autocomplete="email" placeholder="nombre@empresa.com.py · +595…" /></div>
+            <div class="campo"><label for="f-sup">Superficie estimada (m²)</label><input id="f-sup" name="superficie" type="text" inputmode="numeric" placeholder="12.500" /></div>
+          </div>
+          <div class="campo"><label for="f-msj">Contanos tu obra *</label><textarea id="f-msj" name="mensaje" rows="3" placeholder="Ubicación, luz libre, altura útil, plazo previsto…"></textarea></div>
+          <div class="form-pie">
+            <button class="cta grande" type="submit">Enviar solicitud</button>
+            <a class="boton-linea grande" href="https://wa.me/595000000000" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+          </div>
+          <div class="form-nota">Respuesta &lt; 48 h hábiles · Asunción, PY</div>
+        </form>
+
+        <div id="form-ok">
+          <h3>Abrimos tu correo.</h3>
+          <p>La solicitud quedó cargada con destino a comercial@nexgalpones.com.py — envíala y te respondemos en menos de 48 horas hábiles.</p>
+          <button class="boton-linea" type="button" id="form-reset" style="margin-top:22px;">Cargar otra solicitud</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ COLOFÓN ══════════════════════════════════════════════════════ -->
+<footer data-tema="profundo" data-folio="Colofón">
+  <div class="wrap">
+    <a class="marca" href="#inicio" aria-label="Volver arriba"><b>NEX</b><span>Galpones Paraguay</span></a>
+    <div class="frase">NEX Grupo es Rótula Metalúrgica <span class="grad-luz">en el Paraguay.</span></div>
+    <div class="datos">
+      <span>Asunción · Paraguay</span>
+      <a href="tel:+59521000000">+595 21 000 000</a>
+      <a href="mailto:comercial@nexgalpones.com.py">comercial@nexgalpones.com.py</a>
+      <span>@nexgalponespy</span>
+    </div>
+    <div class="legal">SINEJOIST® es marca registrada de Rótula Metalúrgica · Fundada en 1989 · © 2026 NEX Galpones Paraguay · Grupo NEX</div>
+    <div class="escala">Esc. 1:1 — Todas las obras son reales.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return [].slice.call((c || document).querySelectorAll(s)); };
+  var reducido = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var tieneIO = "IntersectionObserver" in window;
+
+  /* ── virada de página: el body hereda el tema de la sección al centro ── */
+  var cabecera = $("#cabecera");
+  var FONDOS = { claro: "#F5F5F3", oscuro: "#101613", profundo: "#0A0F0C" };
+  function aplicarTema(tema) {
+    if (document.body.dataset.tema !== tema) document.body.dataset.tema = tema;
+    cabecera.style.setProperty("--fondo-actual", FONDOS[tema] || FONDOS.claro);
+  }
+  var secciones = $$("[data-tema]").filter(function (el) { return el !== document.body; });
+  if (tieneIO) {
+    var ioTema = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) aplicarTema(e.target.dataset.tema); });
+    }, { rootMargin: "-42% 0px -42% 0px", threshold: 0 });
+    secciones.forEach(function (s) { ioTema.observe(s); });
+  }
+
+  /* ── folio lateral ── */
+  var folioNum = $("#folio .num"), folioNombre = $("#folio .nombre"), folioBarra = $("#folio .pista i");
+  var conFolio = $$("[data-folio]");
+  if (tieneIO) {
+    var ioFolio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var i = conFolio.indexOf(e.target);
+        folioNum.textContent = (i + 1 < 10 ? "0" : "") + (i + 1);
+        folioNombre.textContent = e.target.dataset.folio;
+      });
+    }, { rootMargin: "-42% 0px -42% 0px", threshold: 0 });
+    conFolio.forEach(function (s) { ioFolio.observe(s); });
+  }
+
+  /* ── header sólido tras el primer scroll ── */
+  function pintarHeader() { cabecera.classList.toggle("solida", scrollY > 24); }
+
+  /* ── rotador del hero ── */
+  var giros = $$("#rotador .giro");
+  var pies = ["de galpón logístico en una sola obra", "de acero exportado a ExxonMobil, Guyana", "fabricando estructura pesada"];
+  var pieEl = $("#rotador-pie"), giroIdx = 0;
+  if (!reducido && giros.length > 1) {
+    setInterval(function () {
+      giros[giroIdx].classList.remove("activa");
+      giroIdx = (giroIdx + 1) % giros.length;
+      giros[giroIdx].classList.add("activa");
+      pieEl.style.opacity = 0;
+      setTimeout(function () { pieEl.textContent = pies[giroIdx]; pieEl.style.opacity = ""; }, 260);
+    }, 3200);
+    pieEl.style.transition = "opacity .25s ease";
+  }
+
+  /* ── manifiesto palabra por palabra (ligado al scroll) ── */
+  var mani = $("#mani"), palabras = [];
+  if (mani) {
+    var partes = mani.textContent.trim().split(/\s+/);
+    mani.textContent = "";
+    partes.forEach(function (w, i) {
+      var s = document.createElement("span");
+      s.className = "pal" + (/acá|paraguay/i.test(w) ? " acento" : "");
+      s.textContent = w;
+      mani.appendChild(s);
+      if (i < partes.length - 1) mani.appendChild(document.createTextNode(" "));
+      palabras.push(s);
+    });
+  }
+  function pintarManifiesto() {
+    if (!mani || reducido || !palabras.length) return;
+    var r = mani.getBoundingClientRect();
+    var vh = innerHeight;
+    var p = (vh * 0.82 - r.top) / (r.height + vh * 0.35);
+    p = Math.max(0, Math.min(1, p));
+    var n = Math.round(p * palabras.length);
+    for (var i = 0; i < palabras.length; i++) palabras[i].classList.toggle("on", i < n);
+  }
+
+  /* ── odómetro de capacidad ── */
+  function armarOdo(el) {
+    var texto = el.dataset.odo;
+    el.setAttribute("aria-label", texto);
+    el.innerHTML = "";
+    texto.split("").forEach(function (ch) {
+      if (/\d/.test(ch)) {
+        var col = document.createElement("span"); col.className = "col";
+        var tira = document.createElement("b");
+        tira.innerHTML = "0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9";
+        tira.style.lineHeight = "1";
+        col.appendChild(tira);
+        col.dataset.digito = ch;
+        el.appendChild(col);
+      } else {
+        var f = document.createElement("span"); f.className = "fijo"; f.textContent = ch;
+        el.appendChild(f);
+      }
+    });
+  }
+  function dispararOdo(el, retraso) {
+    $$(".col", el).forEach(function (col, i) {
+      var tira = col.firstChild;
+      var destino = parseInt(col.dataset.digito, 10);
+      if (reducido) { tira.style.transform = "translateY(" + (-destino) + "em)"; return; }
+      tira.style.transform = "translateY(0)";
+      setTimeout(function () {
+        tira.style.transitionDelay = (i * 70) + "ms";
+        tira.style.transform = "translateY(" + (-destino) + "em)";
+      }, 40 + (retraso || 0));
+    });
+  }
+  var odos = $$("[data-odo]");
+  odos.forEach(armarOdo);
+  if (tieneIO) {
+    var ioOdo = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting || e.target.__hecho) return;
+        e.target.__hecho = true;
+        dispararOdo(e.target, 0);
+        ioOdo.unobserve(e.target);
+      });
+    }, { threshold: 0.5 });
+    odos.forEach(function (o) { ioOdo.observe(o); });
+  } else {
+    odos.forEach(function (o) { dispararOdo(o, 0); });
+  }
+
+  /* ── rail de portadas ── */
+  var rail = $("#rail"), cuenta = $("#rail-cuenta");
+  var portadas = $$(".portada", rail);
+  function pasoRail() {
+    if (portadas.length < 2) return 0;
+    return portadas[1].offsetLeft - portadas[0].offsetLeft;
+  }
+  function pintarCuenta() {
+    var paso = pasoRail(); if (!paso) return;
+    var i = Math.min(portadas.length - 1, Math.max(0, Math.round(rail.scrollLeft / paso)));
+    cuenta.textContent = (i + 1 < 10 ? "0" : "") + (i + 1) + " / 0" + portadas.length;
+  }
+  rail.addEventListener("scroll", function () { requestAnimationFrame(pintarCuenta); }, { passive: true });
+  $("#rail-ant").addEventListener("click", function () { rail.scrollBy({ left: -pasoRail(), behavior: reducido ? "auto" : "smooth" }); });
+  $("#rail-sig").addEventListener("click", function () { rail.scrollBy({ left: pasoRail(), behavior: reducido ? "auto" : "smooth" }); });
+  rail.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight") { e.preventDefault(); rail.scrollBy({ left: pasoRail(), behavior: "smooth" }); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); rail.scrollBy({ left: -pasoRail(), behavior: "smooth" }); }
+  });
+  /* arrastre con puntero fino */
+  var arrastre = null;
+  rail.addEventListener("pointerdown", function (e) {
+    if (e.pointerType !== "mouse") return;
+    arrastre = { x: e.clientX, sl: rail.scrollLeft, movio: false };
+    rail.classList.add("arrastrando");
+  });
+  addEventListener("pointermove", function (e) {
+    if (!arrastre) return;
+    var dx = e.clientX - arrastre.x;
+    if (Math.abs(dx) > 4) arrastre.movio = true;
+    rail.scrollLeft = arrastre.sl - dx;
+  }, { passive: true });
+  addEventListener("pointerup", function () { arrastre = null; rail.classList.remove("arrastrando"); });
+
+  /* ── toggle revista / técnica ── */
+  var btnRev = $("#btn-revista"), btnTec = $("#btn-tecnica");
+  var zonaRev = $("#zona-revista"), zonaTec = $("#zona-tecnica");
+  function verRevista(si) {
+    btnRev.setAttribute("aria-pressed", String(si));
+    btnTec.setAttribute("aria-pressed", String(!si));
+    zonaRev.classList.toggle("oculta", !si);
+    zonaTec.classList.toggle("visible", !si);
+  }
+  btnRev.addEventListener("click", function () { verRevista(true); });
+  btnTec.addEventListener("click", function () { verRevista(false); });
+
+  /* ── tabla técnica: 17 obras, ordenable ── */
+  var OBRAS = [
+    { t: "Galpón Lyon", cat: "Cubiertas y galpones", loc: "Simões Filho / BA", v: 85000, u: "m²" },
+    { t: "Galpón Cone", cat: "Cubiertas y galpones", loc: "Cabo de Sto. Agostinho / PE", v: 65000, u: "m²" },
+    { t: "Galpón Brasília", cat: "Cubiertas y galpones", loc: "Brasília / DF", v: 42000, u: "m²" },
+    { t: "Galpón CiaLog", cat: "Cubiertas y galpones", loc: "Simões Filho / BA", v: 30000, u: "m²" },
+    { t: "Ferreira Costa", cat: "Industriales", loc: "Salvador / BA", v: 32500, u: "m²" },
+    { t: "Exxon Mobil", cat: "Industriales", loc: "Guyana", v: 1200, u: "ton" },
+    { t: "Shopping Bela Vista", cat: "Pisos múltiples", loc: "Salvador / BA", v: 110000, u: "m²" },
+    { t: "Shopping Rio Mar", cat: "Pisos múltiples", loc: "Recife / PE", v: 92000, u: "m²" },
+    { t: "Centro de Convenciones", cat: "Pisos múltiples", loc: "Salvador / BA", v: 37000, u: "m²" },
+    { t: "Tribunal de Justicia", cat: "Pisos múltiples", loc: "Salvador / BA", v: 16500, u: "m²" },
+    { t: "Concha Acústica", cat: "Pisos múltiples", loc: "Salvador / BA", v: 14000, u: "m²" },
+    { t: "Hospital Samel", cat: "Pisos múltiples", loc: "Manaus / AM", v: 12500, u: "m²" },
+    { t: "Arena Castelão", cat: "Estadios", loc: "Fortaleza / CE", v: 4200, u: "ton" },
+    { t: "Salvador Shopping", cat: "Pisos múltiples", loc: "Salvador / BA", v: 3800, u: "ton" },
+    { t: "Viaducto Complejo Imbuí", cat: "Vías y transportes", loc: "Salvador / BA", v: 550, u: "ton" },
+    { t: "Complejo Viario Acceso Norte", cat: "Vías y transportes", loc: "Salvador / BA", v: 480, u: "ton" },
+    { t: "Puente Sauípe", cat: "Vías y transportes", loc: "Bahía", v: 280, u: "ton" }
+  ];
+  var cuerpoTabla = $("#tabla-obras tbody");
+  var fmt = function (n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); };
+  function pintarTabla(lista) {
+    cuerpoTabla.innerHTML = "";
+    lista.forEach(function (o, i) {
+      var tr = document.createElement("tr");
+      tr.innerHTML =
+        '<td class="num">' + (i + 1 < 10 ? "0" : "") + (i + 1) + "</td>" +
+        '<td class="nombre">' + o.t + "</td>" +
+        "<td>" + o.cat + "</td>" +
+        '<td class="sub">' + o.loc + "</td>" +
+        '<td class="dim">' + fmt(o.v) + " " + o.u + "</td>";
+      cuerpoTabla.appendChild(tr);
+    });
+  }
+  var orden = { clave: "dim", asc: false };
+  function ordenar() {
+    var l = OBRAS.slice();
+    if (orden.clave === "dim") {
+      l.sort(function (a, b) {
+        if (a.u !== b.u) return a.u === "m²" ? -1 : 1;      /* m² primero, ton después */
+        return orden.asc ? a.v - b.v : b.v - a.v;
+      });
+    } else if (orden.clave !== "i") {
+      var k = orden.clave;
+      l.sort(function (a, b) { return orden.asc ? a[k].localeCompare(b[k]) : b[k].localeCompare(a[k]); });
+    }
+    pintarTabla(l);
+    $$("#tabla-obras th").forEach(function (th) {
+      var activo = th.dataset.orden === orden.clave;
+      if (activo) th.setAttribute("aria-sort", orden.asc ? "ascending" : "descending");
+      else th.removeAttribute("aria-sort");
+      $(".flecha", th).textContent = activo && orden.asc ? "↑" : "↓";
+    });
+  }
+  $$("#tabla-obras th").forEach(function (th) {
+    th.addEventListener("click", function () {
+      var k = th.dataset.orden;
+      if (orden.clave === k) orden.asc = !orden.asc;
+      else { orden.clave = k; orden.asc = (k === "t" || k === "cat" || k === "loc"); }
+      ordenar();
+    });
+  });
+  ordenar();
+
+  /* ── cartela documental ── */
+  var cartela = $("#cartela");
+  if (tieneIO && cartela) {
+    var ioCart = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { cartela.classList.add("on"); ioCart.disconnect(); } });
+    }, { threshold: 0.4 });
+    ioCart.observe(cartela);
+  } else if (cartela) { cartela.classList.add("on"); }
+
+  /* ── plancheta: líneas guía ── */
+  var plancheta = $("#plancheta");
+  if (tieneIO && plancheta) {
+    var ioPl = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { plancheta.classList.add("on"); ioPl.disconnect(); } });
+    }, { threshold: 0.35 });
+    ioPl.observe(plancheta);
+  } else if (plancheta) { plancheta.classList.add("on"); }
+
+  /* ── PY que se llena con el scroll ── */
+  var pyRect = $("#py-rect"), pySvg = $("#py-svg");
+  function pintarPY() {
+    if (!pyRect || !pySvg) return;
+    if (reducido) { pyRect.setAttribute("y", 0); pyRect.setAttribute("height", 300); return; }
+    var r = pySvg.getBoundingClientRect(), vh = innerHeight;
+    var p = (vh * 0.9 - r.top) / (r.height + vh * 0.45);
+    p = Math.max(0, Math.min(1, p));
+    var h = Math.round(p * 300);
+    pyRect.setAttribute("y", 300 - h);
+    pyRect.setAttribute("height", h);
+  }
+
+  /* ── revelado genérico (títulos y bloques) ── */
+  var revelables = $$(".acto, .obras-cab h2, .py-texto h2, #sistema h2, #contacto h2, .py-razones > div, .leyenda .item, .rotulo, .ruta");
+  revelables.forEach(function (el) { el.classList.add("rev"); });
+  if (tieneIO && !reducido) {
+    var ioRev = new IntersectionObserver(function (es) {
+      es.forEach(function (e, i) {
+        if (!e.isIntersecting) return;
+        e.target.style.transitionDelay = Math.min(i * 60, 240) + "ms";
+        e.target.classList.add("vis");
+        ioRev.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
+    revelables.forEach(function (el) { ioRev.observe(el); });
+  } else {
+    revelables.forEach(function (el) { el.classList.add("vis"); });
+  }
+
+  /* ── formulario con eco de m² ── */
+  var eco = $("#eco"), inpSup = $("#f-sup");
+  inpSup.addEventListener("input", function () {
+    var d = inpSup.value.replace(/\D/g, "").slice(0, 7);
+    inpSup.value = d ? fmt(+d) : "";
+    if (d) { eco.innerHTML = fmt(+d) + ' <span class="u">m²</span>'; eco.classList.add("lleno"); }
+    else { eco.innerHTML = '— <span class="u">m²</span>'; eco.classList.remove("lleno"); }
+  });
+  var form = $("#form"), ok = $("#form-ok");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var nombre = $("#f-nombre"), contacto = $("#f-contacto"), msj = $("#f-msj");
+    var falta = false;
+    [nombre, contacto, msj].forEach(function (c) {
+      var vacio = !c.value.trim();
+      c.classList.toggle("err", vacio);
+      if (vacio) falta = true;
+    });
+    if (falta) return;
+    var cuerpo = [
+      "Nombre: " + nombre.value, "Empresa: " + ($("#f-empresa").value || "—"),
+      "Contacto: " + contacto.value, "Superficie estimada: " + (inpSup.value ? inpSup.value + " m²" : "—"),
+      "", "Obra:", msj.value
+    ].join("\n");
+    location.href = "mailto:comercial@nexgalpones.com.py?subject=" +
+      encodeURIComponent("Solicitud de cotización — " + ($("#f-empresa").value || nombre.value)) +
+      "&body=" + encodeURIComponent(cuerpo);
+    form.style.display = "none";
+    ok.classList.add("visible");
+  });
+  $("#form-reset").addEventListener("click", function () {
+    form.reset(); form.style.display = ""; ok.classList.remove("visible");
+    eco.innerHTML = '— <span class="u">m²</span>'; eco.classList.remove("lleno");
+  });
+  $$("#form input, #form textarea").forEach(function (c) {
+    c.addEventListener("input", function () { c.classList.remove("err"); });
+  });
+
+  /* ── un solo listener de scroll para todo lo ligado al scroll ── */
+  var folioPend = false;
+  function alScroll() {
+    if (folioPend) return;
+    folioPend = true;
+    requestAnimationFrame(function () {
+      folioPend = false;
+      pintarHeader();
+      pintarManifiesto();
+      pintarPY();
+      var doc = document.documentElement;
+      var p = scrollY / (doc.scrollHeight - innerHeight || 1);
+      folioBarra.style.height = Math.round(p * 100) + "%";
+    });
+  }
+  addEventListener("scroll", alScroll, { passive: true });
+  addEventListener("resize", alScroll, { passive: true });
+  alScroll();
+  pintarCuenta();
+})();
+</script>
+</body>
+</html>
