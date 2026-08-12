@@ -637,7 +637,7 @@
         <div style="display:flex; flex-direction:column; gap:12px; margin-top:20px; font-size:15px; line-height:1.6;">
           <div>Asunción, Paraguay</div>
           <div>+595 21 000 000</div>
-          <div>comercial@nexgalpones.com.py</div>
+          <div>{{ email }}</div>
           <div>@nexgalponespy</div>
         </div>
       </div>
@@ -657,7 +657,14 @@
 // backend propio…). Mientras esté vacío, el formulario abre el cliente de
 // correo del visitante con la solicitud ya cargada — nunca se pierde el lead.
 const ENDPOINT_FORMULARIO = "";
-const EMAIL_COMERCIAL = "comercial@nexgalpones.com.py";
+// Armado en dos partes a propósito. Cloudflare tiene activada la ofuscación
+// de correos (Scrape Shield): reescribe cualquier dirección que encuentre en
+// el HTML por un <a class="__cf_email__">[email protected]</a> que un script
+// suyo decodifica al cargar la página. Ese script corre antes de que el
+// framework monte el DOM, así que el marcador nunca llegaba a decodificarse y
+// el visitante veía literalmente "[email protected]" en el pie. Sin una
+// dirección literal en el archivo, no hay nada que reescribir.
+const EMAIL_COMERCIAL = "contacto" + "@" + "nexgrupopy.com";
 const ANIO_FUNDACION = 1989;
 
 const CAMPOS = ["nombre", "empresa", "email", "tel", "tipo", "sup", "desc"];
@@ -956,6 +963,7 @@ class Component extends DCLogic {
 
     return {
       nav: navItems,
+      email: EMAIL_COMERCIAL,
       menuAbierto: this.state.menuAbierto,
       abrirMenu: () => this.abrirMenu(),
       cerrarMenu: () => this.cerrarMenu(),
@@ -1010,7 +1018,7 @@ class Component extends DCLogic {
       contactos: [
         { label: "Oficina comercial", value: "Asunción, Paraguay" },
         { label: "Teléfono", value: "+595 21 000 000" },
-        { label: "Email", value: "comercial@nexgalpones.com.py" },
+        { label: "Email", value: EMAIL_COMERCIAL },
         { label: "Horario", value: "Lunes a viernes, 8:00 a 17:00" }
       ],
       enviado: this.state.enviado,
