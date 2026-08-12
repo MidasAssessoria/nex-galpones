@@ -10,3 +10,8 @@ desktop.ini
 # Backups locais do editor
 *.bak
 *.bak[0-9]
+
+# Pacote de deploy manual da v3 no Cloudflare (direct upload). E gerado a
+# partir de v3.html + assets, entao versionar so duplicaria as imagens.
+deploy-v3/
+nex-v3-cloudflare.zip

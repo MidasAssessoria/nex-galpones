@@ -9,15 +9,18 @@
 <x-dc>
 <helmet>
 <title>NEX Galpones Paraguay | Estructuras metálicas y galpones industriales</title>
-<meta name="description" content="Galpones logísticos, naves industriales y estructuras metálicas en Paraguay: ingeniería BIM, fábrica CNC y sistema SineJoist®, con el respaldo de un grupo metalúrgico brasileño que fabrica desde 1989." />
+<meta name="description" content="Galpones logísticos, naves industriales y estructuras metálicas en Paraguay. Operación de Rótula Metalúrgica, metalúrgica brasileña desde 1989: ingeniería BIM, fábrica CNC y sistema SineJoist®." />
 <meta name="theme-color" content="#16452C" />
+<!-- Versión anterior (con Obras y Empresa), conservada como referencia desde
+     que la v3 pasó a la raíz. No se indexa y el canónico apunta al sitio. -->
+<meta name="robots" content="noindex" />
 <link rel="canonical" href="https://nexgalpones.com.py/" />
 
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="es_PY" />
 <meta property="og:site_name" content="NEX Galpones Paraguay" />
 <meta property="og:title" content="NEX Galpones Paraguay | Estructuras que construyen el futuro" />
-<meta property="og:description" content="Ingeniería de clase mundial, ahora fabricada en Paraguay. Galpones logísticos, naves industriales y estructura pesada, con +35 años de experiencia detrás." />
+<meta property="og:description" content="Ingeniería de clase mundial, ahora fabricada en Paraguay. Galpones logísticos, naves industriales y estructura pesada con el respaldo de Rótula Metalúrgica, +35 años." />
 <meta property="og:image" content="https://nexgalpones.com.py/assets/hero-galpon.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 
@@ -43,6 +46,7 @@
      vive em style inline e nao ha outra forma de sobrepor por media query. */
   @media (max-width: 1080px) {
     [data-g="4"] { grid-template-columns: repeat(2, 1fr) !important; }
+    [data-g="6"] { grid-template-columns: repeat(3, 1fr) !important; }
   }
   @media (max-width: 900px) {
     [data-g="3"] { grid-template-columns: repeat(2, 1fr) !important; }
@@ -69,6 +73,9 @@
                   transform .6s cubic-bezier(.16,.84,.44,1);
     }
     html.anim [data-rev].vis { opacity: 1; transform: none; }
+
+    html.anim [data-lightbox] { animation: aparece .28s cubic-bezier(.16,.84,.44,1); }
+    @keyframes aparece { from { opacity: 0 } to { opacity: 1 } }
   }
 
   /* botón de menú: sólo existe en la franja móvil/tablet */
@@ -89,11 +96,17 @@
 
   @media (max-width: 620px) {
     [data-g="3"], [data-g="4"] { grid-template-columns: 1fr !important; }
+    [data-g="6"] { grid-template-columns: repeat(2, 1fr) !important; }
     [data-g="footer"] { grid-template-columns: 1fr !important; }
+    /* em coluna unica, span 2 criaria uma coluna implicita e estouraria a tela */
+    [data-span] { grid-column: span 1 !important; }
+    /* a divisoria vertical das estatisticas nao faz sentido em coluna unica */
+    [data-g="4"] > div { border-right: 0 !important; }
 
     /* Alturas dimensionadas para grade de 4 colunas: numa coluna so, elas
        esticam o cartao sem motivo. A home tinha 9,6 telas de rolagem. */
     [data-glow] { min-height: 0 !important; }
+    [data-span] > div:first-child { min-height: 220px !important; }
     /* o isometrico e decorativo: 132px x 4 cartoes custavam 528px de rolagem */
     [data-glow] > img { height: 94px !important; }
   }
@@ -101,6 +114,7 @@
   /* Alvos de toque: o minimo confortavel e 44px, tambem na largura —
      um link de texto curto tem area de toque estreita demais. */
   footer [data-g="footer"] button { min-height: 44px; min-width: 44px; padding-right: 12px; }
+  [data-filtro] { min-height: 44px; }
 
   /* ── acentos de marca ────────────────────────────────────────────── */
   ::selection { background: #16452C; color: #FFFFFF; }
@@ -165,61 +179,9 @@
   }
   @media (max-width: 1099px) { [data-rotador] { display:none; } }
 
-  /* ── lámina de anatomía ──────────────────────────────────────────────
-     Esta versión no muestra obra ajena: el peso visual lo lleva el dibujo
-     técnico. El galpón se presenta acotado, como en una lámina, con las
-     piezas numeradas al lado. Las cotas son paramétricas a propósito — L y
-     H son justamente los datos que pedimos para dimensionar. */
-  [data-esq] { position:absolute; width:11px; height:11px; }
-  [data-esq="tl"] { top:-1px; left:-1px; border-top:1px solid #4CAF6D; border-left:1px solid #4CAF6D; }
-  [data-esq="tr"] { top:-1px; right:-1px; border-top:1px solid #4CAF6D; border-right:1px solid #4CAF6D; }
-  [data-esq="bl"] { bottom:-1px; left:-1px; border-bottom:1px solid #4CAF6D; border-left:1px solid #4CAF6D; }
-  [data-esq="br"] { bottom:-1px; right:-1px; border-bottom:1px solid #4CAF6D; border-right:1px solid #4CAF6D; }
-
-  /* Cotas: línea fina con marcas en las puntas. Se posicionan dentro del
-     envoltorio del dibujo — que no tiene alto propio, lo hereda de la
-     imagen — así los porcentajes caen siempre sobre el mismo punto. */
-  [data-cota-h] { position:absolute; left:2%; right:9%; bottom:-30px; height:1px; background:rgba(76,175,109,0.45); }
-  [data-cota-h]::before, [data-cota-h]::after { content:""; position:absolute; top:-5px; width:1px; height:11px; background:rgba(76,175,109,0.75); }
-  [data-cota-h]::before { left:0; }
-  [data-cota-h]::after { right:0; }
-  [data-cota-h] span { position:absolute; left:50%; top:10px; transform:translateX(-50%); white-space:nowrap; }
-
-  /* La cota H vive en el aire libre a la izquierda del dibujo. Ese margen es
-     el padding de la lámina cuando el dibujo llega a los 400px de ancho, así
-     que la línea y la letra tienen que caber en ~23px: por eso la etiqueta es
-     una sola letra, en horizontal, y el pie de la lámina la explica. */
-  [data-cota-v] { position:absolute; left:-18px; top:25%; bottom:13%; width:1px; background:rgba(76,175,109,0.45); }
-  [data-cota-v]::before, [data-cota-v]::after { content:""; position:absolute; left:-5px; width:11px; height:1px; background:rgba(76,175,109,0.75); }
-  [data-cota-v]::before { top:0; }
-  [data-cota-v]::after { bottom:0; }
-  [data-cota-v] span { position:absolute; left:-5px; top:-20px; }
-
-  [data-cota-h] span, [data-cota-v] span {
-    font-family:'Archivo',sans-serif; font-size:11px; font-weight:700;
-    letter-spacing:0.16em; text-transform:uppercase; color:#4CAF6D;
-  }
-
-  /* Números sobre el dibujo, en el mismo orden que la lista de al lado */
-  [data-punto] {
-    position:absolute; transform:translate(-50%, -50%);
-    width:26px; height:26px; display:flex; align-items:center; justify-content:center;
-    border:1px solid #4CAF6D; background:rgba(13,21,18,0.78);
-    font-family:'Archivo',sans-serif; font-size:11px; font-weight:700; color:#4CAF6D;
-  }
-
-  /* En una sola columna la lámina caería antes de su propio título; el orden
-     invertido deja que la sección se lea (kicker → titular → piezas) y recién
-     después muestre el dibujo. */
-  @media (max-width: 900px) {
-    [data-anatomia] > div:first-child { order: 2; }
-  }
-
-  [data-sello] {
-    position:absolute; right:16px; top:14px;
-    font-family:'Archivo',sans-serif; font-size:10px; font-weight:600;
-    letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.3);
-  }
+  /* Cifra de portada sobre las fotos de obra (número blanco, unidad verde) */
+  [data-cifra] { font-family:'Archivo',sans-serif; font-stretch:115%; font-weight:800; letter-spacing:-0.03em; line-height:1; color:#FFFFFF; font-variant-numeric:tabular-nums; }
+  [data-cifra] span { color:#4CAF6D; font-weight:700; font-size:0.55em; }
 
   /* PY que se llena de verde con el scroll (misma técnica de recorte de
      texto que los titulares con degradado; --py la escribe el script). */
@@ -245,7 +207,7 @@
         <img loading="lazy" src="assets/logo.jpg" alt="NEX Galpones Paraguay" width="128" height="52" style="height:52px; width:auto; display:block; mix-blend-mode:multiply;" />
       </div>
       <nav data-nav style="display:flex; align-items:center; gap:4px;">
-        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="3">
+        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="5">
           <button onClick="{{ item.go }}" style="background:none; border:0; padding:10px 16px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; border-bottom:2px solid transparent; color:{{ item.color }}; border-bottom-color:{{ item.line }};" style-hover="color:#16452C;">{{ item.label }}</button>
         </sc-for>
         <button onClick="{{ goContacto }}" style="margin-left:16px; background:#16452C; color:#FFFFFF; border:0; padding:14px 24px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;" style-hover="background:#2E7D4F;">Cotizar obra</button>
@@ -268,7 +230,7 @@
         <button onClick="{{ cerrarMenu }}" aria-label="Cerrar menú" style="background:none; border:0; padding:10px 4px; min-height:44px; min-width:44px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#14171A; cursor:pointer;">Cerrar</button>
       </div>
       <nav style="flex:1; overflow-y:auto; padding:8px clamp(18px, 5vw, 32px) 0;">
-        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="3">
+        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="5">
           <button onClick="{{ item.goMenu }}" style="display:block; width:100%; min-height:60px; text-align:left; background:none; border:0; border-bottom:1px solid #EDEDEA; padding:0; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:22px; font-weight:700; letter-spacing:-0.01em; color:{{ item.colorMenu }}; cursor:pointer;">{{ item.label }}</button>
         </sc-for>
       </nav>
@@ -294,10 +256,10 @@
           <span style="color:#FFFFFF; font-family:'Archivo',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase;">Ahora en Paraguay</span>
         </div>
         <h1 style="margin:0; max-width:900px; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(24px, 5.6vw, 76px); line-height:1.02; font-weight:800; letter-spacing:-0.025em; color:#FFFFFF; text-wrap:balance;">Estructuras que construyen <span data-grad-text>el futuro</span></h1>
-        <p style="margin:28px 0 0; max-width:620px; font-size:18px; line-height:1.6; color:rgba(255,255,255,0.82);">Ingeniería de clase mundial, ahora fabricada en Paraguay: galpones logísticos, naves industriales y estructura pesada con plazos más cortos, flete nacional y respuesta en Asunción. El respaldo: +35 años fabricando estructura pesada.</p>
+        <p style="margin:28px 0 0; max-width:620px; font-size:18px; line-height:1.6; color:rgba(255,255,255,0.82);">Ingeniería de clase mundial, ahora fabricada en Paraguay: galpones logísticos, naves industriales y estructura pesada con plazos más cortos, flete nacional y respuesta en Asunción. El respaldo: Rótula Metalúrgica, +35 años.</p>
         <div style="display:flex; gap:16px; margin-top:44px; flex-wrap:wrap;">
           <button onClick="{{ goContacto }}" style="background:#FFFFFF; color:#14171A; border:0; padding:18px 34px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;" style-hover="background:#4CAF6D; color:#FFFFFF;">Solicitar cotización</button>
-          <button onClick="{{ goTecnologia }}" style="background:transparent; color:#FFFFFF; border:1px solid rgba(255,255,255,0.5); padding:18px 34px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;" style-hover="border-color:#FFFFFF; background:rgba(255,255,255,0.08);">Conocer el sistema</button>
+          <button onClick="{{ goObras }}" style="background:transparent; color:#FFFFFF; border:1px solid rgba(255,255,255,0.5); padding:18px 34px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;" style-hover="border-color:#FFFFFF; background:rgba(255,255,255,0.08);">Ver portafolio</button>
         </div>
         <div data-rotador aria-hidden="true">
           <div data-giro="va">
@@ -310,15 +272,15 @@
           </div>
           <div data-giro="">
             <div style="font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(40px, 3.4vw, 56px); font-weight:800; letter-spacing:-0.03em; color:#FFFFFF; line-height:1;">4.200<span style="font-size:0.42em; color:#4CAF6D; font-weight:700;"> ton</span></div>
-            <div style="margin-top:8px; font-size:13px; color:rgba(255,255,255,0.66);">de estructura metálica en una sola cubierta</div>
+            <div style="margin-top:8px; font-size:13px; color:rgba(255,255,255,0.66);">Arena Castelão · sí, también la hicimos</div>
           </div>
         </div>
       </div>
     </section>
 
     <section style="background:linear-gradient(168deg,#1A5334 0%,#16452C 48%,#0F3722 100%);">
-      <div data-g="3" data-stats style="max-width:1280px; margin:0 auto; padding:0 clamp(20px, 2.5vw, 32px); display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(20px, 3vw, 44px);">
-        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="3">
+      <div data-g="4" data-stats style="max-width:1280px; margin:0 auto; padding:0 clamp(20px, 2.5vw, 32px); display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(20px, 3vw, 44px);">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
           <div style="padding:clamp(24px, 5vw, 72px) 0;">
             <div style="display:flex; align-items:baseline; gap:9px; min-height:clamp(24px, 3.8vw, 54px);">
               <span data-count style="font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(24px, 4.2vw, 60px); font-weight:800; color:#FFFFFF; letter-spacing:-0.03em; line-height:0.9; white-space:nowrap;">{{ s.valor }}</span>
@@ -337,7 +299,7 @@
         <div data-py aria-hidden="true" style="margin-top:32px;">PY</div>
       </div>
       <div>
-        <p style="margin:0; font-size:18px; line-height:1.7; color:#3D4348;">NEX es la operación paraguaya de un grupo metalúrgico brasileño que fabrica estructura pesada desde 1989. La experiencia viene de +35 años, 12 estados de Brasil y obra entregada hasta en Guyana; la fabricación, el equipo y la respuesta comercial están acá, en Asunción.</p>
+        <p style="margin:0; font-size:18px; line-height:1.7; color:#3D4348;">NEX es la operación paraguaya del grupo Rótula Metalúrgica, fundado en 1989 por el ingeniero mecánico Pedro Gordilho. La experiencia viene de +35 años, 12 estados de Brasil y obra entregada hasta en Guyana; la fabricación, el equipo y la respuesta comercial están acá, en Asunción.</p>
         <div data-g="3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px;">
           <sc-for list="{{ pilares }}" as="p" hint-placeholder-count="3">
             <div style="border-top:2px solid #14171A; padding-top:20px;">
@@ -386,53 +348,30 @@
       </div>
     </section>
 
-    <!-- Anatomía: la pieza visual fuerte de esta versión. Donde el sitio
-         completo muestra obra entregada, acá se muestra el objeto en sí,
-         dibujado y acotado. El envoltorio del dibujo no tiene alto propio —
-         lo hereda de la imagen — así que los números caen siempre sobre la
-         misma parte del galpón, en cualquier ancho de pantalla. -->
     <section style="background:#14171A; color:#FFFFFF;">
       <div style="max-width:1280px; margin:0 auto; padding:clamp(33px, 7.64vw, 110px) clamp(20px, 2.5vw, 32px);">
-        <div data-g="2" data-anatomia style="display:grid; grid-template-columns:0.92fr 1.08fr; gap:clamp(28px, 4.86vw, 70px); align-items:center;">
-
-          <div>
-            <div style="position:relative; border:1px solid rgba(255,255,255,0.14); background:linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0) 62%); padding:clamp(38px, 4.2vw, 60px) clamp(26px, 3.4vw, 48px) clamp(64px, 6vw, 84px);">
-              <span data-esq="tl"></span><span data-esq="tr"></span><span data-esq="bl"></span><span data-esq="br"></span>
-              <div data-sello>Iso · Galpón NEX</div>
-              <div style="position:relative; width:100%; max-width:400px; margin:0 auto;">
-                <img src="assets/iso-galpon-w.webp" alt="Isométrico de un galpón: cubierta, celosía joist, pórtico y base anclada" loading="lazy" width="700" height="912" style="display:block; width:100%;" />
-                <div data-cota-v><span>H</span></div>
-                <div data-cota-h><span>L · luz libre</span></div>
-                <span data-punto style="left:29%; top:38%;">01</span>
-                <span data-punto style="left:69%; top:54%;">02</span>
-                <span data-punto style="left:45%; top:71%;">03</span>
-                <span data-punto style="left:47%; top:84%;">04</span>
+        <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px 40px; margin-bottom:48px;">
+          <h2 style="margin:0; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(28px, 3.2vw, 44px); line-height:1.1; font-weight:700; letter-spacing:-0.02em;">Obras destacadas</h2>
+          <button onClick="{{ goObras }}" style="background:none; border:0; border-bottom:1px solid rgba(255,255,255,0.4); padding:6px 0; color:#FFFFFF; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;" style-hover="border-bottom-color:#4CAF6D; color:#4CAF6D;">Ver las {{ totalObras }} obras</button>
+        </div>
+        <div data-g="3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+          <sc-for list="{{ destacadas }}" as="o" hint-placeholder-count="3">
+            <div data-glow onClick="{{ o.abrir }}" style="background:#1D2124; cursor:pointer;">
+              <div data-zoom style="position:relative; height:300px; background:#22282B; overflow:hidden;">
+                <img loading="lazy" src="{{ o.img }}" alt="{{ o.t }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+                <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(13,21,18,0) 32%, rgba(13,21,18,0.88) 100%);"></div>
+                <div style="position:absolute; right:14px; top:14px; border:1px solid rgba(255,255,255,0.45); background:rgba(11,15,13,0.35); padding:5px 11px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.08em; color:#FFFFFF; white-space:nowrap;">{{ o.conteoFotos }}</div>
+                <div style="position:absolute; left:24px; right:24px; bottom:20px;">
+                  <div style="font-family:'Archivo',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#4CAF6D;">{{ o.cat }}</div>
+                  <div data-cifra style="margin-top:10px; font-size:clamp(30px, 2.8vw, 40px);">{{ o.medidaValor }}<span> {{ o.medidaUnidad }}</span></div>
+                </div>
+              </div>
+              <div style="padding:22px 24px clamp(18px, 2vw, 26px);">
+                <div style="font-family:'Archivo',sans-serif; font-stretch:115%; font-size:21px; font-weight:700; letter-spacing:-0.01em;">{{ o.t }}</div>
+                <div style="margin-top:8px; font-size:13px; color:rgba(255,255,255,0.55);">{{ o.loc }}</div>
               </div>
             </div>
-            <p style="margin:20px 0 0; font-size:14px; line-height:1.65; color:rgba(255,255,255,0.5);">L de luz libre, H de altura útil. Con esos dos datos y la superficie prevista ya dimensionamos la estructura y estimamos el tonelaje.</p>
-          </div>
-
-          <div>
-            <div data-kicker style="font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#4CAF6D;">Anatomía del sistema</div>
-            <h2 style="margin:20px 0 0; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(28px, 3.2vw, 44px); line-height:1.1; font-weight:700; letter-spacing:-0.02em;">Un galpón nuestro, <span data-grad-text style="display:inline-block;">pieza por pieza</span></h2>
-            <p style="margin:22px 0 0; font-size:17px; line-height:1.7; color:rgba(255,255,255,0.72); max-width:560px;">Siempre el mismo puñado de piezas, cortadas en CNC y repetidas en módulo constante. Lo que llega a tu terreno ya viene resuelto: se atornilla, no se improvisa.</p>
-            <div style="margin-top:40px; border-top:1px solid rgba(255,255,255,0.18);">
-              <sc-for list="{{ piezas }}" as="pz" hint-placeholder-count="4">
-                <div style="display:flex; gap:22px; padding:19px 0; border-bottom:1px solid rgba(255,255,255,0.10);">
-                  <div style="flex:none; width:26px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.06em; color:#4CAF6D;">{{ pz.n }}</div>
-                  <div>
-                    <div style="font-family:'Archivo',sans-serif; font-size:17px; font-weight:700; color:#FFFFFF;">{{ pz.t }}</div>
-                    <div style="margin-top:7px; font-size:15px; line-height:1.6; color:rgba(255,255,255,0.6);">{{ pz.d }}</div>
-                  </div>
-                </div>
-              </sc-for>
-            </div>
-            <div style="margin-top:36px; display:flex; align-items:center; gap:26px;">
-              <img src="assets/pieza-nudo.webp" alt="Detalle de un nudo atornillado entre pilar y viga" loading="lazy" width="1000" height="1258" style="flex:none; width:104px; height:auto;" />
-              <div style="font-size:15px; line-height:1.65; color:rgba(255,255,255,0.6);">El nudo atornillado es la prueba: la precisión se resuelve en fábrica, con control dimensional pieza por pieza, y no arriba del andamio.</div>
-            </div>
-          </div>
-
+          </sc-for>
         </div>
       </div>
     </section>
@@ -443,6 +382,111 @@
         <div style="position:relative;">
           <h2 style="margin:0; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(27px, 3.1vw, 42px); line-height:1.12; font-weight:700; letter-spacing:-0.02em;">¿Tenés un proyecto en Paraguay? Lo dimensionamos con vos.</h2>
           <p style="margin:20px 0 0; font-size:17px; line-height:1.7; color:rgba(255,255,255,0.78); max-width:560px;">Envianos el alcance de la obra —metros cuadrados, luz libre, plazo— y te devolvemos una propuesta técnica con estimación de tonelaje.</p>
+        </div>
+        <div style="position:relative; display:flex; flex-direction:column; gap:14px;">
+          <button onClick="{{ goContacto }}" style="background:#FFFFFF; color:#16452C; border:0; padding:20px 30px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;" style-hover="background:#4CAF6D; color:#FFFFFF;">Solicitar cotización</button>
+          <a href="https://wa.me/595000000000" target="_blank" style="background:transparent; color:#FFFFFF; border:1px solid rgba(255,255,255,0.5); padding:20px 30px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; text-align:center;" style-hover="background:rgba(255,255,255,0.1);">Escribir por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isEmpresa }}">
+  <main>
+    <section style="background:#FFFFFF; border-bottom:1px solid #E3E3DF;">
+      <div style="position:relative; max-width:1280px; margin:0 auto; padding:clamp(26px, 6.11vw, 88px) clamp(20px, 2.5vw, 32px) clamp(24px, 5.00vw, 72px);">
+        <img src="assets/iso-industrial.webp" alt="" loading="lazy" style="position:absolute; right:24px; bottom:0; height:260px; width:auto; opacity:0.14; pointer-events:none;" />
+        <div data-kicker style="position:relative; font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#2E7D4F;">La empresa</div>
+        <h1 style="position:relative; margin:20px 0 0; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(24px, 4.4vw, 60px); line-height:1.05; font-weight:800; letter-spacing:-0.025em; max-width:900px;">Desde 1989 fabricando <span data-grad-ink>estructura pesada</span></h1>
+      </div>
+    </section>
+
+    <section data-g="2" style="max-width:1280px; margin:0 auto; padding:clamp(29px, 6.67vw, 96px) clamp(20px, 2.5vw, 32px); display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px, 5.56vw, 80px);">
+      <div>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(23px, 2.3vw, 32px); font-weight:700; letter-spacing:-0.02em;">Nuestra historia</h2>
+        <p style="margin:20px 0 0; font-size:17px; line-height:1.75; color:#3D4348;">Fundada en 1989 por el ingeniero mecánico Pedro Gordilho, Rótula Metalúrgica es referencia en el mercado de estructuras metálicas, mixtas y de ingeniería avanzada. Ofrece soluciones estructurales para edificios de múltiples pisos, cubiertas de galpones logísticos, puentes, viaductos y pasarelas.</p>
+        <p style="margin:18px 0 0; font-size:17px; line-height:1.75; color:#3D4348;">Con obras en más de 12 estados de Brasil y fuera del país, la empresa opera con capacidad para producir más de 20.000 toneladas al año, con productos de alta diversidad y complejidad. NEX Galpones Paraguay es la extensión de esa operación al mercado paraguayo.</p>
+        <div style="margin-top:36px; border:1px solid #E3E3DF; background:#FFFFFF;">
+          <sc-for list="{{ hitos }}" as="h" hint-placeholder-count="4">
+            <div style="display:flex; gap:28px; padding:22px 26px; border-bottom:1px solid #EDEDEA;">
+              <div data-kicker style="font-family:'Archivo',sans-serif; font-size:15px; font-weight:700; color:#2E7D4F; min-width:84px;">{{ h.y }}</div>
+              <div style="font-size:15px; line-height:1.6; color:#3D4348;">{{ h.t }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(23px, 2.3vw, 32px); font-weight:700; letter-spacing:-0.02em;">Logística internacional</h2>
+        <p style="margin:20px 0 0; font-size:17px; line-height:1.75; color:#3D4348;">Una cadena logística estructurada con transportes intermodales permite entregar proyectos completos más allá de las fronteras: alta calidad, menor costo y plazo cumplido. Es la misma capacidad que sostiene obras entregadas en Guyana Inglesa y la que hoy abastece a Paraguay.</p>
+        <figure style="margin:32px 0 0;">
+          <div data-zoom style="overflow:hidden;">
+            <img src="assets/empresa-logistica.jpg" alt="Piezas estructurales embaladas y estibadas en la cubierta de un buque" loading="lazy" width="650" height="537" style="display:block; width:100%;" />
+          </div>
+          <figcaption style="margin:12px 0 0; font-size:13px; line-height:1.6; color:#7A8085;">Piezas embaladas y estibadas para embarque</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section style="background:#14171A; color:#FFFFFF; border-bottom:1px solid rgba(255,255,255,0.10);">
+      <div data-g="2" style="max-width:1280px; margin:0 auto; padding:clamp(29px, 6.67vw, 96px) clamp(20px, 2.5vw, 32px); display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px, 5.00vw, 72px); align-items:center;">
+        <img src="assets/empresa-mapa.webp" alt="Mapa de Brasil con los estados donde hay obra entregada" loading="lazy" width="885" height="885" style="display:block; width:100%; max-width:420px; margin:0 auto;" />
+        <div>
+          <div data-kicker style="font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#4CAF6D;">Alcance</div>
+          <h2 style="margin:18px 0 0; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(25px, 2.8vw, 38px); line-height:1.12; font-weight:700; letter-spacing:-0.02em;">Obra entregada en más de 12 estados</h2>
+          <p style="margin:20px 0 0; font-size:17px; line-height:1.75; color:rgba(255,255,255,0.72);">Desde Bahía hasta el Amazonas, y fuera de Brasil: Guyana Inglesa y ahora Paraguay. La misma cadena logística que cruza el país es la que cruza la frontera.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#14171A; color:#FFFFFF;">
+      <div data-g="2" style="max-width:1280px; margin:0 auto; padding:clamp(29px, 6.67vw, 96px) clamp(20px, 2.5vw, 32px); display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px, 5.00vw, 72px); align-items:center;">
+        <div>
+          <h2 style="margin:0; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(25px, 2.8vw, 38px); line-height:1.12; font-weight:700; letter-spacing:-0.02em;">Capacidad industrial</h2>
+          <p style="margin:20px 0 0; font-size:17px; line-height:1.75; color:rgba(255,255,255,0.72);">Tecnología de última generación, sistemas modernos de automatización y maquinaria CNC que garantizan precisión milimétrica y alta productividad en la fabricación.</p>
+          <div style="margin-top:40px; border-top:1px solid rgba(255,255,255,0.18);">
+            <sc-for list="{{ etapasFabrica }}" as="ef" hint-placeholder-count="4">
+              <div style="display:flex; align-items:baseline; gap:22px; padding:18px 0; border-bottom:1px solid rgba(255,255,255,0.10);">
+                <div style="font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.16em; color:#4CAF6D; min-width:24px;">{{ ef.n }}</div>
+                <div style="font-family:'Archivo',sans-serif; font-size:17px; font-weight:600; color:#FFFFFF;">{{ ef.t }}</div>
+                <div style="margin-left:auto; font-size:13px; color:rgba(255,255,255,0.55); text-align:right;">{{ ef.d }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div data-g="2" style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,0.14);">
+          <sc-for list="{{ capacidad }}" as="c" hint-placeholder-count="4">
+            <div data-glow style="background:#14171A; padding:34px 28px;">
+              <div style="font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(24px, 2.5vw, 34px); font-weight:800; letter-spacing:-0.02em;">{{ c.n }}</div>
+              <div style="margin-top:10px; font-size:13px; line-height:1.5; color:rgba(255,255,255,0.6);">{{ c.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px; margin:0 auto; padding:clamp(29px, 6.67vw, 96px) clamp(20px, 2.5vw, 32px);">
+      <h2 style="margin:0 0 12px; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(23px, 2.3vw, 32px); font-weight:700; letter-spacing:-0.02em;">Clientes</h2>
+      <p style="margin:0 0 40px; font-size:17px; line-height:1.75; color:#3D4348; max-width:720px;">Más que proveer estructuras metálicas, construimos relaciones de confianza con clientes de industria, comercio e infraestructura. Un portafolio que refleja excelencia e innovación.</p>
+      <div data-g="6" style="display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:#E3E3DF; border:1px solid #E3E3DF;">
+        <sc-for list="{{ sectores }}" as="s" hint-placeholder-count="6">
+          <div style="background:#FFFFFF; padding:38px 18px; text-align:center; font-family:'Archivo',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.08em; color:#5B6268;" style-hover="background:#F3F8F4; color:#16452C;">{{ s }}</div>
+        </sc-for>
+      </div>
+      <figure style="margin:clamp(24px, 5vw, 72px) 0 0;">
+        <div data-zoom style="overflow:hidden;">
+          <img src="assets/empresa-equipo.jpg" alt="Equipo de montaje reunido en obra" loading="lazy" width="1006" height="258" style="display:block; width:100%;" />
+        </div>
+        <figcaption style="margin:14px 0 0; font-size:13px; line-height:1.6; color:#7A8085;">Equipo en obra — ExxonMobil, Guyana Inglesa</figcaption>
+      </figure>
+    </section>
+
+    <section style="max-width:1280px; margin:0 auto; padding:0 clamp(20px, 2.5vw, 32px) clamp(36px, 8.33vw, 120px);">
+      <div data-g="2" style="position:relative; overflow:hidden; background:#16452C; color:#FFFFFF; padding:clamp(24px, 5.56vw, 80px) clamp(24px, 4.44vw, 64px); display:grid; grid-template-columns:1.2fr 0.8fr; gap:clamp(24px, 4.17vw, 60px); align-items:center;">
+        <img data-norev src="assets/iso-industrial-w.webp" alt="" loading="lazy" style="position:absolute; right:-3%; bottom:-18%; height:120%; width:auto; opacity:0.1; pointer-events:none;" />
+        <div style="position:relative;">
+          <h2 style="margin:0; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(27px, 3.1vw, 42px); line-height:1.12; font-weight:700; letter-spacing:-0.02em;">¿Querés esta capacidad en tu obra?</h2>
+          <p style="margin:20px 0 0; font-size:17px; line-height:1.7; color:rgba(255,255,255,0.78); max-width:560px;">La misma ingeniería, fábrica y logística que entregó obra en 12 estados de Brasil ya opera para proyectos paraguayos.</p>
         </div>
         <div style="position:relative; display:flex; flex-direction:column; gap:14px;">
           <button onClick="{{ goContacto }}" style="background:#FFFFFF; color:#16452C; border:0; padding:20px 30px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;" style-hover="background:#4CAF6D; color:#FFFFFF;">Solicitar cotización</button>
@@ -535,6 +579,68 @@
   </main>
   </sc-if>
 
+  <sc-if value="{{ isObras }}">
+  <main>
+    <section style="background:#FFFFFF; border-bottom:1px solid #E3E3DF;">
+      <div style="position:relative; max-width:1280px; margin:0 auto; padding:clamp(26px, 6.11vw, 88px) clamp(20px, 2.5vw, 32px) 0;">
+        <img width="900" height="1200" src="assets/iso-grua.webp" alt="" loading="lazy" style="position:absolute; right:24px; bottom:0; height:360px; width:auto; opacity:0.16; pointer-events:none;" />
+        <div data-kicker style="position:relative; font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#2E7D4F;">Portafolio</div>
+        <h1 style="position:relative; margin:20px 0 0; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(24px, 4.4vw, 60px); line-height:1.05; font-weight:800; letter-spacing:-0.025em; max-width:900px;"><span data-grad-ink>{{ totalObras }} obras</span> entregadas en 12 estados y fuera del país</h1>
+        <div style="display:flex; gap:8px; margin-top:48px; flex-wrap:wrap;">
+          <sc-for list="{{ filtros }}" as="f" hint-placeholder-count="5">
+            <button data-filtro onClick="{{ f.go }}" style="border:1px solid #E3E3DF; padding:12px 22px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; margin-bottom:-1px; background:{{ f.bg }}; color:{{ f.color }}; border-color:{{ f.border }};" style-hover="border-color:#16452C;">{{ f.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px; margin:0 auto; padding:clamp(24px, 4.44vw, 64px) clamp(20px, 2.5vw, 32px) clamp(33px, 7.64vw, 110px);">
+      <div data-g="3" data-mosaico style="display:grid; grid-template-columns:repeat(3,1fr); gap:28px; grid-auto-flow:dense;">
+        <sc-for list="{{ obrasFiltradas }}" as="o" hint-placeholder-count="9">
+          <div data-span data-glow onClick="{{ o.abrir }}" style="grid-column:{{ o.span }}; background:#FFFFFF; border:1px solid #E3E3DF; display:flex; flex-direction:column; overflow:hidden; cursor:{{ o.cursor }};" style-hover="border-color:#16452C;">
+            <div data-zoom style="position:relative; flex:1 1 auto; min-height:{{ o.alturaFoto }}; background:#20262A; overflow:hidden; display:flex; align-items:flex-end; padding:22px;">
+              <sc-if value="{{ o.hasImg }}">
+                <img loading="lazy" src="{{ o.img }}" alt="{{ o.alt }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:{{ o.pos }};" />
+              </sc-if>
+              <sc-if value="{{ o.noImg }}">
+                <div style="position:absolute; inset:0; background:#1B2124; display:flex; align-items:center; justify-content:center; padding:30px 24px 44px;">
+                  <img src="{{ o.iso }}" alt="{{ o.t }}" loading="lazy" style="max-width:100%; max-height:100%; object-fit:contain; opacity:0.55;" />
+                </div>
+              </sc-if>
+              <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(13,21,18,0) 30%, rgba(13,21,18,0.85) 100%);"></div>
+              <sc-if value="{{ o.tieneGaleria }}">
+                <div style="position:absolute; right:14px; top:14px; border:1px solid rgba(255,255,255,0.45); background:rgba(11,15,13,0.35); padding:5px 11px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.08em; color:#FFFFFF; white-space:nowrap;">{{ o.conteoFotos }}</div>
+              </sc-if>
+              <div style="position:relative; width:100%;">
+                <div style="font-family:'Archivo',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#4CAF6D;">{{ o.cat }}</div>
+                <div data-cifra style="margin-top:8px; font-size:clamp(26px, 2.2vw, 34px);">{{ o.medidaValor }}<span> {{ o.medidaUnidad }}</span></div>
+              </div>
+            </div>
+            <div style="padding:22px 24px 26px;">
+              <div style="font-family:'Archivo',sans-serif; font-stretch:115%; font-size:20px; font-weight:700; letter-spacing:-0.01em;">{{ o.t }}</div>
+              <div style="margin-top:8px; font-size:13px; color:#7A8085;">{{ o.loc }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="max-width:1280px; margin:0 auto; padding:0 clamp(20px, 2.5vw, 32px) clamp(36px, 8.33vw, 120px);">
+      <div data-g="2" style="position:relative; overflow:hidden; background:#16452C; color:#FFFFFF; padding:clamp(24px, 5.56vw, 80px) clamp(24px, 4.44vw, 64px); display:grid; grid-template-columns:1.2fr 0.8fr; gap:clamp(24px, 4.17vw, 60px); align-items:center;">
+        <img data-norev src="assets/iso-grua-w.webp" alt="" loading="lazy" style="position:absolute; right:0; bottom:-20%; height:135%; width:auto; opacity:0.1; pointer-events:none;" />
+        <div style="position:relative;">
+          <h2 style="margin:0; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(27px, 3.1vw, 42px); line-height:1.12; font-weight:700; letter-spacing:-0.02em;">Tu obra puede ser la próxima del portafolio.</h2>
+          <p style="margin:20px 0 0; font-size:17px; line-height:1.7; color:rgba(255,255,255,0.78); max-width:560px;">Galpones, pisos múltiples, industria e infraestructura: dimensionamos la estructura completa con vos.</p>
+        </div>
+        <div style="position:relative; display:flex; flex-direction:column; gap:14px;">
+          <button onClick="{{ goContacto }}" style="background:#FFFFFF; color:#16452C; border:0; padding:20px 30px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;" style-hover="background:#4CAF6D; color:#FFFFFF;">Solicitar cotización</button>
+          <a href="https://wa.me/595000000000" target="_blank" style="background:transparent; color:#FFFFFF; border:1px solid rgba(255,255,255,0.5); padding:20px 30px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; text-align:center;" style-hover="background:rgba(255,255,255,0.1);">Escribir por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
   <sc-if value="{{ isContacto }}">
   <main>
     <section style="background:#FFFFFF; border-bottom:1px solid #E3E3DF;">
@@ -613,6 +719,44 @@
   </main>
   </sc-if>
 
+  <sc-if value="{{ galeriaAbierta }}">
+    <div data-lightbox onClick="{{ cerrarObra }}" style="position:fixed; inset:0; z-index:200; background:#0B0F0D; display:flex; flex-direction:column;">
+
+      <div onClick="{{ noCerrar }}" style="flex:none; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px clamp(14px, 3vw, 28px); border-bottom:1px solid rgba(255,255,255,0.12); cursor:default;">
+        <div style="min-width:0;">
+          <div style="font-family:'Archivo',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#4CAF6D;">{{ g.cat }}</div>
+          <div style="margin-top:4px; font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(17px, 1.7vw, 22px); font-weight:700; letter-spacing:-0.01em; color:#FFFFFF; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ g.t }}</div>
+        </div>
+        <button onClick="{{ cerrarObra }}" aria-label="Cerrar" style="flex:none; width:46px; height:46px; background:none; border:1px solid rgba(255,255,255,0.35); color:#FFFFFF; font-size:20px; line-height:1; cursor:pointer;" style-hover="border-color:#FFFFFF; background:rgba(255,255,255,0.1);">✕</button>
+      </div>
+
+      <div data-visor onClick="{{ noCerrar }}" style="flex:1 1 auto; position:relative; min-height:0; display:flex; align-items:center; justify-content:center; padding:clamp(10px, 2vw, 24px); cursor:default;">
+        <img src="{{ g.foto }}" alt="{{ g.alt }}" style="display:block; max-width:100%; max-height:100%; width:auto; object-fit:contain;" />
+        <sc-if value="{{ g.varias }}">
+          <button onClick="{{ anterior }}" aria-label="Foto anterior" style="position:absolute; left:clamp(6px, 1.5vw, 20px); top:50%; transform:translateY(-50%); width:48px; height:48px; background:rgba(11,15,13,0.66); border:1px solid rgba(255,255,255,0.28); color:#FFFFFF; font-size:22px; line-height:1; cursor:pointer;" style-hover="background:#16452C; border-color:#4CAF6D;">‹</button>
+          <button onClick="{{ siguiente }}" aria-label="Foto siguiente" style="position:absolute; right:clamp(6px, 1.5vw, 20px); top:50%; transform:translateY(-50%); width:48px; height:48px; background:rgba(11,15,13,0.66); border:1px solid rgba(255,255,255,0.28); color:#FFFFFF; font-size:22px; line-height:1; cursor:pointer;" style-hover="background:#16452C; border-color:#4CAF6D;">›</button>
+        </sc-if>
+      </div>
+
+      <div onClick="{{ noCerrar }}" style="flex:none; padding:14px clamp(14px, 3vw, 28px) calc(14px + env(safe-area-inset-bottom)); border-top:1px solid rgba(255,255,255,0.12); cursor:default;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:18px;">
+          <div style="font-size:14px; line-height:1.5; color:rgba(255,255,255,0.82);">{{ g.leyenda }}</div>
+          <div style="flex:none; font-family:'Archivo',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.08em; color:rgba(255,255,255,0.5);">{{ g.contador }}</div>
+        </div>
+        <div style="margin-top:4px; font-size:12px; color:rgba(255,255,255,0.42);">{{ g.loc }} · {{ g.medida }}</div>
+        <sc-if value="{{ g.varias }}">
+          <div data-tiras style="display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto; margin-top:14px; padding-bottom:2px;">
+            <sc-for list="{{ g.miniaturas }}" as="m" hint-placeholder-count="4">
+              <button onClick="{{ m.ir }}" style="flex:0 0 auto; width:84px; height:56px; padding:0; background:#0D1512; border:1px solid {{ m.borde }}; opacity:{{ m.op }}; cursor:pointer;" style-hover="opacity:1;">
+                <img src="{{ m.f }}" alt="" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;" />
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
   <a href="https://wa.me/595000000000" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" title="Escribir por WhatsApp" style="position:fixed; right:clamp(16px, 3vw, 28px); bottom:calc(clamp(16px, 3vw, 28px) + env(safe-area-inset-bottom)); z-index:90; width:56px; height:56px; background:#16452C; display:flex; align-items:center; justify-content:center; box-shadow:0 12px 30px rgba(11,25,17,0.38);" style-hover="background:#2E7D4F;">
     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFFFFF'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z'/%3E%3C/svg%3E" alt="" width="26" height="26" style="display:block; width:26px; height:26px;" />
   </a>
@@ -622,12 +766,12 @@
       <div>
         <div style="font-family:'Archivo',sans-serif; font-stretch:115%; font-size:clamp(21px, 1.9vw, 26px); font-weight:800; letter-spacing:-0.02em; color:#FFFFFF;">NEX GALPONES PARAGUAY</div>
         <div style="margin-top:10px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:#4CAF6D;">Estructuras que construyen el futuro</div>
-        <p style="margin:24px 0 0; font-size:15px; line-height:1.7; max-width:420px;">Operación paraguaya de un grupo metalúrgico brasileño fundado en 1989. Estructuras metálicas, mixtas e ingeniería avanzada.</p>
+        <p style="margin:24px 0 0; font-size:15px; line-height:1.7; max-width:420px;">Operación paraguaya de Rótula Metalúrgica, metalúrgica brasileña fundada en 1989. Estructuras metálicas, mixtas e ingeniería avanzada.</p>
       </div>
       <div>
         <div style="font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#FFFFFF;">Navegación</div>
         <div style="display:flex; flex-direction:column; align-items:flex-start; gap:12px; margin-top:20px;">
-          <sc-for list="{{ nav }}" as="item" hint-placeholder-count="3">
+          <sc-for list="{{ nav }}" as="item" hint-placeholder-count="5">
             <button onClick="{{ item.go }}" style="background:none; border:0; padding:0; color:rgba(255,255,255,0.6); font-size:15px; cursor:pointer; text-align:left;" style-hover="color:#FFFFFF;">{{ item.label }}</button>
           </sc-for>
         </div>
@@ -644,7 +788,7 @@
     </div>
     <div style="max-width:1280px; margin:0 auto; padding:24px clamp(20px, 2.5vw, 32px) clamp(22px, 3.33vw, 48px); border-top:1px solid rgba(255,255,255,0.12); display:flex; justify-content:space-between; gap:24px; font-size:13px;">
       <div>© 2026 NEX Galpones Paraguay · Grupo NEX</div>
-      <div>SINEJOIST® es marca registrada</div>
+      <div>SINEJOIST® es marca registrada de Rótula Metalúrgica</div>
     </div>
   </footer>
 </div>
@@ -664,9 +808,47 @@ const CAMPOS = ["nombre", "empresa", "email", "tel", "tipo", "sup", "desc"];
 const VACIO = { nombre: "", empresa: "", email: "", tel: "",
                 tipo: "Galpón logístico", sup: "", desc: "" };
 
+const OBRAS = [
+  { t: "Galpón Lyon", loc: "Simões Filho / BA", medida: "85.000 m²", cat: "Cubiertas y galpones",
+    fotos: [{ f: "assets/p11-galpao-lyon-85000m2-0.jpg", c: "Vista aérea del conjunto" }, { f: "assets/p11-galpao-lyon-85000m2-1.jpg", c: "Nave interior concluida" }, { f: "assets/p11-galpao-lyon-85000m2-2.jpg", c: "Cubierta metálica desde el interior" }] },
+  { t: "Galpón Cone", loc: "Cabo de Santo Agostinho / PE", medida: "65.000 m²", cat: "Cubiertas y galpones",
+    fotos: [{ f: "assets/p09-galpao-cone-65000m2-1.jpg", c: "Vista aérea del conjunto" }, { f: "assets/p09-galpao-cone-65000m2-0.jpg", c: "Nave interior concluida" }, { f: "assets/p09-galpao-cone-65000m2-2.jpg", c: "Interior con pilares metálicos" }] },
+  { t: "Galpón CiaLog", loc: "Simões Filho / BA", medida: "30.000 m²", cat: "Cubiertas y galpones",
+    fotos: [{ f: "assets/p10-galpao-cialog-30000m2-2.jpg", c: "Vista aérea al atardecer" }, { f: "assets/p10-galpao-cialog-30000m2-0.jpg", c: "Vista aérea del conjunto" }, { f: "assets/p10-galpao-cialog-30000m2-3.jpg", c: "Cubierta en montaje" }, { f: "assets/p10-galpao-cialog-30000m2-1.jpg", c: "Estructura de cubierta desde el interior" }] },
+  { t: "Galpón Brasília", loc: "Brasília / DF", medida: "42.000 m²", cat: "Cubiertas y galpones",
+    fotos: [{ f: "assets/p08-galpao-brasilia-42000m2-3.jpg", c: "Vista aérea de la obra concluida" }, { f: "assets/p08-galpao-brasilia-42000m2-1.jpg", c: "Pórticos y correas en montaje" }, { f: "assets/p08-galpao-brasilia-42000m2-2.jpg", c: "Cubierta desde el interior" }, { f: "assets/p08-galpao-brasilia-42000m2-0.jpg", c: "Detalle de pilar y estructura de cubierta" }] },
+  { t: "Exxon Mobil", loc: "Guyana Inglesa", medida: "1.200 ton", cat: "Industriales",
+    fotos: [{ f: "assets/p23-exxonmobil-guiana-1200ton-1.jpg", c: "Vista aérea de la obra concluida" }, { f: "assets/p23-exxonmobil-guiana-1200ton-2.jpg", c: "Montaje de la estructura metálica" }, { f: "assets/p23-exxonmobil-guiana-1200ton-0.jpg", c: "Vista aérea durante el montaje" }] },
+  { t: "Ferreira Costa", loc: "Salvador / BA", medida: "32.500 m²", cat: "Industriales",
+    fotos: [{ f: "assets/p12-ferreira-costa-32500m2-3.jpg", c: "Vista aérea del conjunto" }, { f: "assets/p12-ferreira-costa-32500m2-1.jpg", c: "Estructura de cubierta en montaje" }] },
+  { t: "Shopping Bela Vista", loc: "Salvador / BA", medida: "110.000 m²", cat: "Pisos múltiples",
+    fotos: [{ f: "assets/p16-shopping-bela-vista-110000m2-3.jpg", c: "Obra concluida" }, { f: "assets/p16-shopping-bela-vista-110000m2-2.jpg", c: "Estructura durante la obra" }] },
+  { t: "Shopping Rio Mar", loc: "Recife / PE", medida: "92.000 m²", cat: "Pisos múltiples",
+    fotos: [{ f: "assets/p18-shopping-riomar-92000m2-2.jpg", c: "Fachada concluida" }, { f: "assets/p18-shopping-riomar-92000m2-3.jpg", c: "Vista aérea del conjunto" }, { f: "assets/p18-shopping-riomar-92000m2-1.jpg", c: "Acceso principal" }] },
+  { t: "Salvador Shopping", loc: "Salvador / BA", medida: "3.800 ton", cat: "Pisos múltiples",
+    fotos: [{ f: "assets/p17-salvador-shopping-3800ton-0.jpg", c: "Obra concluida" }] },
+  { t: "Hospital Samel", loc: "Manaus / AM", medida: "12.500 m²", cat: "Pisos múltiples",
+    fotos: [{ f: "assets/p13-hospital-samel-12500m2-2.jpg", c: "Torre concluida" }, { f: "assets/p13-hospital-samel-12500m2-0.jpg", c: "Estructura metálica en montaje" }, { f: "assets/p13-hospital-samel-12500m2-1.jpg", c: "Pórticos desde el nivel inferior" }, { f: "assets/p13-hospital-samel-12500m2-3.jpg", c: "Izaje de piezas en obra" }, { f: "assets/p13-hospital-samel-12500m2-4.jpg", c: "Acceso del hospital" }] },
+  { t: "Arena Castelão", loc: "Fortaleza / CE", medida: "4.200 ton", cat: "Pisos múltiples",
+    fotos: [{ f: "assets/castelao.jpg", c: "Vista aérea de la cubierta" }] },
+  { t: "Tribunal de Justicia", loc: "Salvador / BA", medida: "16.500 m²", cat: "Pisos múltiples",
+    fotos: [{ f: "assets/p14-tribunal-justica-16500m2-3.jpg", c: "Sede concluida" }, { f: "assets/p14-tribunal-justica-16500m2-4.jpg", c: "Acceso principal" }, { f: "assets/p14-tribunal-justica-16500m2-1.jpg", c: "Fachada de vidrio" }, { f: "assets/p14-tribunal-justica-16500m2-0.jpg", c: "Estructura metálica desde el interior" }, { f: "assets/p14-tribunal-justica-16500m2-2.jpg", c: "Estructura en montaje" }] },
+  { t: "Centro de Convenciones", loc: "Salvador / BA", medida: "37.000 m²", cat: "Pisos múltiples",
+    fotos: [{ f: "assets/p22-centro-convencoes-37000m2-1.jpg", c: "Vista aérea de la obra concluida" }, { f: "assets/p22-centro-convencoes-37000m2-2.jpg", c: "Estructura durante la obra" }] },
+  { t: "Concha Acústica", loc: "Salvador / BA", medida: "14.000 m²", cat: "Pisos múltiples",
+    fotos: [{ f: "assets/p21-concha-acustica-14000m2-4.jpg", c: "Vista aérea del conjunto" }, { f: "assets/p21-concha-acustica-14000m2-1.jpg", c: "Cubierta y graderías" }, { f: "assets/p21-concha-acustica-14000m2-3.jpg", c: "Espectáculo en la concha acústica" }] },
+  { t: "Viaducto Complejo Imbuí", loc: "Salvador / BA", medida: "550 ton", cat: "Vías y transportes",
+    fotos: [{ f: "assets/p19-viaduto-imbui-550ton-3.jpg", c: "Viaducto concluido" }] },
+  { t: "Complejo Viario Acceso Norte", loc: "Salvador / BA", medida: "480 ton", cat: "Vías y transportes",
+    fotos: [{ f: "assets/p20-viaduto-acesso-norte-480ton-2.jpg", c: "Tablero y celosía metálica" }, { f: "assets/p20-viaduto-acesso-norte-480ton-0.jpg", c: "Celosía metálica del viaducto" }, { f: "assets/p20-viaduto-acesso-norte-480ton-3.jpg", c: "Vista lateral de la celosía" }] },
+  { t: "Puente Sauípe", loc: "Bahía", medida: "280 ton", cat: "Vías y transportes",
+    fotos: [] }
+];
+
 class Component extends DCLogic {
-  state = { page: "home", enviado: false, enviando: false, porCorreo: false,
-            form: { ...VACIO }, errores: {}, menuAbierto: false };
+  state = { page: "home", filtro: "Todas", enviado: false, enviando: false,
+            porCorreo: false, form: { ...VACIO }, errores: {},
+            obraAbierta: null, foto: 0, menuAbierto: false };
 
   abrirMenu() {
     document.body.style.overflow = "hidden";
@@ -845,6 +1027,7 @@ class Component extends DCLogic {
     window.addEventListener("scroll", this._invalidar, { passive: true });
   }
 
+  // ── galería de obra ────────────────────────────────────────────────
   componentDidMount() {
     this._iniciarRevelado();
     this._iniciarBrillo();
@@ -855,7 +1038,11 @@ class Component extends DCLogic {
     window.addEventListener("resize", this._pyTick, { passive: true });
     this._pintarPY();
     this._tecla = (e) => {
-      if (this.state.menuAbierto && e.key === "Escape") this.cerrarMenu();
+      if (this.state.menuAbierto && e.key === "Escape") { this.cerrarMenu(); return; }
+      if (this.state.obraAbierta == null) return;
+      if (e.key === "Escape") this.cerrarObra();
+      else if (e.key === "ArrowRight") this.moverFoto(1);
+      else if (e.key === "ArrowLeft") this.moverFoto(-1);
     };
     window.addEventListener("keydown", this._tecla);
   }
@@ -872,6 +1059,46 @@ class Component extends DCLogic {
     if (this._mo) this._mo.disconnect();
     clearTimeout(this._red);
     document.body.style.overflow = "";
+  }
+
+  abrirObra(i) {
+    document.body.style.overflow = "hidden";   // evita rolar el fondo
+    this.setState({ obraAbierta: i, foto: 0 }, () => this._armarGesto());
+  }
+
+  // Deslizar es como se pasa una galería en el teléfono; sin esto sólo quedan
+  // las flechas, que en táctil son alvos chicos y quedan sobre la foto.
+  _armarGesto() {
+    const visor = document.querySelector("[data-visor]");
+    if (!visor || visor.__gesto) return;
+    visor.__gesto = true;
+    let x0 = null, y0 = null;
+    visor.addEventListener("touchstart", (e) => {
+      if (e.touches.length !== 1) return;
+      x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+    }, { passive: true });
+    visor.addEventListener("touchend", (e) => {
+      if (x0 == null) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - x0, dy = t.clientY - y0;
+      x0 = null;
+      // sólo cuenta si el gesto fue claramente horizontal
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.6) {
+        this.moverFoto(dx < 0 ? 1 : -1);
+      }
+    }, { passive: true });
+  }
+
+  cerrarObra() {
+    document.body.style.overflow = "";
+    this.setState({ obraAbierta: null });
+  }
+
+  moverFoto(d) {
+    const i = this.state.obraAbierta;
+    if (i == null) return;
+    const n = OBRAS[i].fotos.length;
+    this.setState({ foto: (this.state.foto + d + n) % n });
   }
 
   setCampo(k, e) {
@@ -936,7 +1163,8 @@ class Component extends DCLogic {
   renderVals() {
     const p = this.state.page;
     const navItems = [
-      ["home", "Inicio"], ["tecnologia", "Tecnología"], ["contacto", "Contacto"]
+      ["home", "Inicio"], ["empresa", "Empresa"], ["tecnologia", "Tecnología"],
+      ["obras", "Obras"], ["contacto", "Contacto"]
     ].map(([id, label]) => ({
       label, go: () => this.go(id),
       goMenu: () => { this.cerrarMenu(); this.go(id); },
@@ -944,6 +1172,45 @@ class Component extends DCLogic {
       colorMenu: p === id ? "#16452C" : "#14171A",
       line: p === id ? "#16452C" : "transparent"
     }));
+
+    const obras = OBRAS;
+    // isometrico por categoria: usado no card de segmento (verde, fondo claro)
+    // y como portada de las obras sin foto (blanco, fondo oscuro)
+    const ISO = {
+      "Cubiertas y galpones": "iso-galpon",
+      "Pisos múltiples":      "iso-multipiso",
+      "Industriales":         "iso-industrial",
+      "Vías y transportes":   "iso-viaducto"
+    };
+    // Mosaico: as três fotos de maior resolución e mayor impacto ocupan dos
+    // columnas. Elegidas por resolución real del archivo, no por orden.
+    const DESTAQUE = new Set(["Galpón Cone", "Exxon Mobil", "Arena Castelão"]);
+    // Encuadre: samel es retrato (779x1120) dentro de un card horizontal —
+    // centrado mostraba apenas una franja del medio del edificio.
+    const ENCUADRE = { "Hospital Samel": "center 30%" };
+
+    obras.forEach((o, idx) => {
+      o.img = o.fotos.length ? o.fotos[0].f : null;
+      o.hasImg = !!o.img;
+      o.noImg = !o.img;
+      o.iso = `assets/${ISO[o.cat]}-w.webp`;
+      const destacada = o.hasImg && DESTAQUE.has(o.t);
+      o.span = destacada ? "span 2" : "span 1";
+      o.alturaFoto = destacada ? "340px" : "240px";
+      o.pos = ENCUADRE[o.t] || "center";
+      o.alt = `${o.t}, ${o.loc} — ${o.cat.toLowerCase()}, ${o.medida}`;
+      // cifra de portada: "85.000 m²" → número blanco + unidad verde
+      const [mVal, mUni] = o.medida.split(" ");
+      o.medidaValor = mVal;
+      o.medidaUnidad = mUni;
+      // galeria so faz sentido com mais de una foto
+      o.tieneGaleria = o.fotos.length > 1;
+      o.conteoFotos = `${o.fotos.length} fotos`;
+      o.abrir = o.fotos.length ? () => this.abrirObra(idx) : null;
+      o.cursor = o.fotos.length ? "pointer" : "default";
+    });
+    const cats = ["Todas", "Cubiertas y galpones", "Industriales", "Pisos múltiples", "Vías y transportes"];
+    const f = this.state.filtro;
 
     // vínculo de cada campo del formulario: valor, handler, error y color del borde
     const vinculos = {};
@@ -954,25 +1221,57 @@ class Component extends DCLogic {
       vinculos["c_" + k] = this.state.errores[k] ? "#C0392B" : "#D8D8D3";
     }
 
+    const totalObras = obras.length;
+
+    // ── galería ──────────────────────────────────────────────────────
+    const gi = this.state.obraAbierta;
+    const gObra = (gi != null && OBRAS[gi] && OBRAS[gi].fotos.length) ? OBRAS[gi] : null;
+    const gk = gObra ? Math.min(this.state.foto, gObra.fotos.length - 1) : 0;
+    const gVacia = { cat: "", t: "", loc: "", medida: "", foto: "", alt: "",
+                     leyenda: "", contador: "", varias: false, miniaturas: [] };
+    const g = gObra ? {
+      cat: gObra.cat, t: gObra.t, loc: gObra.loc, medida: gObra.medida,
+      foto: gObra.fotos[gk].f,
+      alt: `${gObra.t} — ${gObra.fotos[gk].c}`,
+      leyenda: gObra.fotos[gk].c,
+      contador: `${gk + 1} / ${gObra.fotos.length}`,
+      varias: gObra.fotos.length > 1,
+      miniaturas: gObra.fotos.map((ft, k) => ({
+        f: ft.f,
+        ir: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ foto: k }); },
+        borde: k === gk ? "#4CAF6D" : "rgba(255,255,255,0.22)",
+        op: k === gk ? "1" : "0.5"
+      }))
+    } : gVacia;
+
     return {
       nav: navItems,
+      totalObras,
+
+      g,
+      galeriaAbierta: !!gObra,
+      cerrarObra: () => this.cerrarObra(),
+      noCerrar: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
+      anterior: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.moverFoto(-1); },
+      siguiente: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.moverFoto(1); },
       menuAbierto: this.state.menuAbierto,
       abrirMenu: () => this.abrirMenu(),
       cerrarMenu: () => this.cerrarMenu(),
       goContactoMenu: () => { this.cerrarMenu(); this.go("contacto"); },
       goHome: () => this.go("home"),
+      goObras: () => this.go("obras"),
       goContacto: () => this.go("contacto"),
       goTecnologia: () => this.go("tecnologia"),
-      isHome: p === "home", isTecnologia: p === "tecnologia", isContacto: p === "contacto",
+      isHome: p === "home", isEmpresa: p === "empresa", isTecnologia: p === "tecnologia",
+      isObras: p === "obras", isContacto: p === "contacto",
 
       // valor y unidad separados: el ojo cae en la cifra, la unidad la califica.
       // "+35" fijo: es la cifra de marca (el mockup la usa), no el cálculo exacto.
-      // Sin portafolio, la cuarta estadística ("N obras") no tiene respaldo que
-      // mostrar: la fila queda en tres y se ensancha en vez de inventar un dato.
       stats: [
         { valor: "+35", unidad: "años", label: "de operación continua desde " + ANIO_FUNDACION },
-        { valor: "20.000", unidad: "t/año",   label: "de capacidad productiva instalada" },
-        { valor: "+12",    unidad: "estados", label: "brasileños con obra entregada" }
+        { valor: "20.000",      unidad: "t/año",   label: "de capacidad productiva instalada" },
+        { valor: "+12",         unidad: "estados", label: "brasileños con obra entregada" },
+        { valor: String(totalObras), unidad: "obras", label: "de referencia en el portafolio" }
       ],
       pilares: [
         { t: "Plazo", d: "Fabricación local: tu cronograma no espera una aduana." },
@@ -985,14 +1284,37 @@ class Component extends DCLogic {
         { num: "03", t: "Industriales", iso: "assets/iso-industrial.webp", d: "Robustez y rapidez constructiva para ambientes de producción intensa, con grandes vanos libres." },
         { num: "04", t: "Vías y transportes", iso: "assets/iso-viaducto.webp", d: "Puentes, viaductos y pasarelas: durabilidad y montaje optimizado para infraestructura urbana y logística." }
       ],
-      // Numeración en el mismo orden que los puntos sobre el dibujo: 01 arriba
-      // en la cubierta y 04 abajo en la base. Si se mueve un punto, se mueve
-      // también la línea de acá.
-      piezas: [
-        { n: "01", t: "Cubierta", d: "Chapa trapezoidal sobre correas: cierra el galpón y baja la carga de viento a la estructura." },
-        { n: "02", t: "Celosía joist", d: "Correas tipo joist galvanizadas: mucha inercia con poco acero, tramos largos sin apoyo intermedio." },
-        { n: "03", t: "Pórtico", d: "Pilar y viga de alma senoidal, repetidos en módulo constante. Esa repetición es la que acelera el montaje." },
-        { n: "04", t: "Base anclada", d: "Placa base atornillada a la fundación: la pieza se posiciona, se aploma y sigue el montaje." }
+      destacadas: obras.slice(0, 3),
+      obrasFiltradas: f === "Todas" ? obras : obras.filter(o => o.cat === f),
+      // el conteo por categoría muestra la profundidad del portafolio
+      filtros: cats.map(c => ({
+        label: c + " · " + (c === "Todas" ? obras.length : obras.filter(o => o.cat === c).length),
+        go: () => this.setState({ filtro: c }),
+        bg: f === c ? "#16452C" : "#FFFFFF",
+        color: f === c ? "#FFFFFF" : "#5B6268",
+        border: f === c ? "#16452C" : "#E3E3DF"
+      })),
+
+      hitos: [
+        { y: "1989", t: "Fundación de Rótula Metalúrgica por el Ing. Pedro Gordilho." },
+        { y: "2000s", t: "Expansión a obras de infraestructura: puentes, viaductos y pasarelas." },
+        { y: "2010s", t: "Adopción del modelado BIM y desarrollo del sistema SineJoist®." },
+        { y: "2026", t: "Apertura de NEX Galpones Paraguay, operación local del grupo." }
+      ],
+      capacidad: [
+        { n: "20.000 t", label: "producción anual" },
+        { n: "Tekla", label: "modelado estructural 3D" },
+        { n: "CNC", label: "corte y armado automatizado" },
+        { n: "Intermodal", label: "logística de exportación" }
+      ],
+      sectores: ["Industria", "Logística", "Retail", "Salud", "Infraestructura", "Sector público"],
+      // Desdobra lo que la propia página ya afirma en Tecnología › proceso 03:
+      // "Corte CNC, armado y galvanizado con control dimensional en fábrica".
+      etapasFabrica: [
+        { n: "01", t: "Corte CNC", d: "Control numérico" },
+        { n: "02", t: "Armado", d: "Perfiles y chapas" },
+        { n: "03", t: "Galvanizado", d: "Protección total" },
+        { n: "04", t: "Control dimensional", d: "Pieza por pieza" }
       ],
 
       ventajas: [
