@@ -6,8 +6,8 @@ Site estático da NEX Galpones Paraguay (Grupo NEX · operação paraguaia da R�
 
 | Arquivo | O que é |
 | --- | --- |
-| `index.html` | **Site oficial** — SPA de 3 páginas (Inicio, Tecnología, Contacto) sobre o runtime próprio `support.js`. É a antiga v3: sem as páginas Obras e Empresa, sem nenhuma foto de obra e sem citar a Rótula pelo nome. No lugar do portfólio, uma lâmina de anatomia — isométrico acotado com as peças numeradas |
-| `v1.html` | **Versão anterior (v1)** — as 5 páginas originais (Inicio, Empresa, Tecnología, Obras, Contacto), com o portfólio de 17 obras. Conservada como referência, com `noindex` |
+| `index.html` | **Site oficial** — SPA de 4 páginas (Inicio, Tecnología, Obras, Contacto) sobre o runtime próprio `support.js`. Sem a página Empresa e sem citar a Rótula pelo nome; o portfólio de 17 obras e a galeria continuam. Na home, a lâmina de anatomia (isométrico acotado com as peças numeradas) entra entre os segmentos e as obras destacadas |
+| `v1.html` | **Versão anterior (v1)** — as 5 páginas originais, com a página Empresa e as menções à Rótula. Conservada como referência, com `noindex` |
 | `v2.html` | **Versão-conceito editorial (v2)** — one-page standalone, com `noindex` |
 | `support.js` | Runtime do template (gerado — não editar à mão) |
 | `assets/` | Imagens do site (heros otimizados, portadas, isométricos) |
@@ -35,10 +35,10 @@ Se for preciso publicar o site em outro projeto Pages sem passar pelo git (*Crea
 python fazer-deploy-v3.py
 ```
 
-O script monta `deploy-v3/` com o `index.html`, o `support.js` e só as 14 imagens que a página usa — o `assets/` completo tem mais de 100 arquivos — e empacota tudo em `nex-v3-cloudflare.zip`, com o `index.html` na raiz do arquivo (dentro de uma pasta, o Pages publicaria o site em um subcaminho). Pasta e zip ficam fora do git de propósito: são derivados.
+O script monta `deploy-v3/` com o `index.html`, o `support.js` e só as imagens que a página realmente referencia — o `assets/` completo tem material de origem que não vai ao ar — e empacota tudo em `nex-v3-cloudflare.zip`, com o `index.html` na raiz do arquivo (dentro de uma pasta, o Pages publicaria o site em um subcaminho). Pasta e zip ficam fora do git de propósito: são derivados.
 
 ## Pendências antes de publicar
 
-- Trocar os placeholders de contato: `wa.me/595000000000` e `+595 21 000 000`
 - Configurar `ENDPOINT_FORMULARIO` no script do site (sem endpoint, o formulário abre o cliente de e-mail do visitante com a solicitação pronta)
+- Confirmar se o WhatsApp usa o mesmo número do telefone (hoje os dois apontam para +595 980 053 055)
 - Definir o domínio final nas metas `og:` e no `canonical`
