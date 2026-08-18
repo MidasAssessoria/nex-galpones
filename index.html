@@ -48,14 +48,15 @@
     [data-g="3"] { grid-template-columns: repeat(2, 1fr) !important; }
     [data-g="2"] { grid-template-columns: 1fr !important; }
 
-    /* La barra necesita 767px para caber en una línea: logo 100 + botones 603
-       + goteras 64. Debajo de 900 se apilaba y llegaba a 149px de alto — 18%
-       de la pantalla de un iPhone 12. Acá pasa a menú desplegable y el header
-       vuelve a 64px, lo que permite recuperar el sticky. */
+    /* La barra necesita ~885px para caber en una línea: logo 204 (el wordmark
+       NEX GROUP a 42px de alto) + botones 603 + goteras 45. Debajo de 900 se
+       apilaba y llegaba a 149px de alto — 18% de la pantalla de un iPhone 12.
+       Acá pasa a menú desplegable y el header vuelve a 64px, lo que permite
+       recuperar el sticky. */
     [data-nav] { display: none !important; }
     [data-menu-btn] { display: inline-flex !important; }
     [data-hdr] { height: 64px !important; }
-    [data-hdr] img { height: 38px !important; }
+    [data-hdr] img { height: 34px !important; }
   }
   /* ── movimiento ──────────────────────────────────────────────────────
      Desplazamiento corto y salida firme: se lee como algo que se coloca en
@@ -255,7 +256,7 @@
   <header style="position:sticky; top:0; z-index:50; background:#FFFFFF; border-bottom:1px solid #E3E3DF;">
     <div data-hdr style="max-width:1280px; margin:0 auto; padding:0 clamp(20px, 2.5vw, 32px); height:84px; display:flex; align-items:center; justify-content:space-between; gap:32px;">
       <div onClick="{{ goHome }}" style="display:flex; align-items:center; cursor:pointer;">
-        <img loading="lazy" src="assets/logo.jpg" alt="NEX Galpones Paraguay" width="128" height="52" style="height:52px; width:auto; display:block; mix-blend-mode:multiply;" />
+        <img loading="lazy" src="assets/logo-nex-group.jpg" alt="NEX Group – Galpones Paraguay" width="204" height="42" style="height:42px; width:auto; display:block; mix-blend-mode:multiply;" />
       </div>
       <nav data-nav style="display:flex; align-items:center; gap:4px;">
         <sc-for list="{{ nav }}" as="item" hint-placeholder-count="4">
@@ -277,7 +278,7 @@
   <sc-if value="{{ menuAbierto }}">
     <div style="position:fixed; inset:0; z-index:120; background:#FFFFFF; display:flex; flex-direction:column;">
       <div style="flex:none; height:64px; padding:0 clamp(18px, 5vw, 32px); display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #E3E3DF;">
-        <img src="assets/logo.jpg" alt="NEX Galpones Paraguay" width="128" height="52" style="height:38px; width:auto; display:block; mix-blend-mode:multiply;" />
+        <img src="assets/logo-nex-group.jpg" alt="NEX Group – Galpones Paraguay" width="165" height="34" style="height:34px; width:auto; display:block; mix-blend-mode:multiply;" />
         <button onClick="{{ cerrarMenu }}" aria-label="Cerrar menú" style="background:none; border:0; padding:10px 4px; min-height:44px; min-width:44px; font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#14171A; cursor:pointer;">Cerrar</button>
       </div>
       <nav style="flex:1; overflow-y:auto; padding:8px clamp(18px, 5vw, 32px) 0;">
